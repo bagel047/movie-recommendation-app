@@ -60,7 +60,7 @@ export default function Header(props) {
                       to={item.href}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-medium no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -80,7 +80,7 @@ export default function Header(props) {
                       }}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-medium no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -94,7 +94,7 @@ export default function Header(props) {
                       to="/login"
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-medium no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -129,7 +129,7 @@ export default function Header(props) {
                 aria-current={item.current ? "page" : undefined}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-medium no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -149,7 +149,7 @@ export default function Header(props) {
                 }}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-medium no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -163,7 +163,7 @@ export default function Header(props) {
                 to="/login"
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-medium no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
