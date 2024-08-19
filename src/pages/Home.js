@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { options } from "../shared";
 import background from "../assets/images/background.jpg";
 import Bookmark from "../components/Bookmark";
 import StarRating from "../components/StarRating";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [details, setDetails] = useState({});
+  let [clicks, setClicks] = useState(0);
+  let [page, setPage] = useState(1);
 
   useEffect(() => {
     fetch(
@@ -29,7 +32,6 @@ export default function Home() {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setDetails((prev) => ({
             ...prev,
             [movie.id]: { data },
@@ -38,8 +40,46 @@ export default function Home() {
     });
   }, [nowPlaying]);
 
+  // Fetch +20 movies od Now Playing
+  useEffect(() => {
+    console.log(typeof page, page);
+    fetch(
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page.toString()}`,
+      options
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        let temp = [...nowPlaying];
+        data.results.forEach((result) => {
+          temp.push(result);
+        });
+        // console.log(temp);
+        setNowPlaying(temp);
+      });
+  }, [page]);
+
+  const slideLeft = () => {
+    const slider = document.querySelector("#slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const slideRight = () => {
+    const slider = document.querySelector("#slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
+    setClicks(clicks + 1);
+  };
+
+  useEffect(() => {
+    console.log("in useeffect for clicks", clicks);
+    if (clicks === 7) {
+      setClicks(0);
+      setPage(page + 1);
+      console.log("7 clicks");
+    }
+  }, [clicks]);
+
   return (
-    <>
+    <div className="font-poppins">
       <div className="relative mb-32">
         <img
           src={background}
@@ -52,50 +92,65 @@ export default function Home() {
 
       {nowPlaying ? (
         <div className="divide-y divide-zinc-600">
-          <h2 className="mb-3 font-bold text-2xl">Now Playing</h2>
+          <h2 className="mb-3 font-semibold text-xl">Now Playing</h2>
 
-          <div className="flex justify-between">
-            {nowPlaying.map((movie) => {
-              return (
-                <>
+          <div className="flex justify-between bg-zinc-900 shadow-md shadow-zinc-950">
+            <ChevronLeftIcon
+              onClick={slideLeft}
+              className="size-8 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-2"
+            ></ChevronLeftIcon>
+            <div
+              id="slider"
+              className="p-5 w-full h-full overflow-x-scroll scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overscroll-contain snap-x snap-mandatory"
+            >
+              {nowPlaying.map((movie) => {
+                return (
                   <div
                     key={movie.id}
-                    class="mt-3 mr-8 min-w-52 h-fit bg-zinc-900"
+                    className="mr-3 w-56 h-fit bg-inherit inline-block snap-start"
                   >
                     <a href="#">
                       <img
-                        className="rounded-t-sm h-[300px] w-full"
+                        className="rounded-t-sm aspect-video object-cover"
                         src={
                           "https://image.tmdb.org/t/p/w500" + movie.poster_path
                         }
                         alt={movie.title + " Poster"}
                       />
                     </a>
-                    <div class="">
+                    <div className="w-full">
                       <a href="#">
-                        <h5 class="pt-3 text-md font-semibold tracking-tight text-gray-900 dark:text-white">
+                        <h5 className="pt-3 text-md text-white dark:text-white font-semibold truncate w-full overflow-hidden">
                           {movie.title}
                         </h5>
                       </a>
-                      <div class="flex items-center mt-2.5 mb-5">
+                      <div className="flex items-center mt-2.5 mb-5">
                         <StarRating
                           rating={details[movie.id]?.data.vote_average || 0}
                         />
 
-                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
-                          {Math.round(
-                            details[movie.id]?.data.vote_average * 10
-                          ) / 10}
+                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
+                          {isNaN(
+                            Math.round(
+                              details[movie.id]?.data.vote_average * 10
+                            ) / 10
+                          )
+                            ? "N/A"
+                            : Math.round(
+                                details[movie.id]?.data.vote_average * 10
+                              ) / 10}
                         </span>
                       </div>
-                      <div class="flex items-end justify-between">
-                        <div className="flex justify-between">
-                          <span class="mr-2 text-sm text-gray-900 dark:text-slate-300">
+                      <div className="flex items-end justify-between">
+                        <div className="flex justify-between text-sm">
+                          <span className="mr-2 text-gray-900 dark:text-slate-300">
                             ({movie.release_date.substr(0, 4)})
                           </span>
 
-                          <span class="text-sm text-gray-900 dark:text-slate-300">
-                            {details[movie.id]?.data.runtime}m
+                          <span className="text-gray-900 dark:text-slate-300">
+                            {details[movie.id]?.data.runtime
+                              ? details[movie.id].data.runtime + "m"
+                              : "N/A"}
                           </span>
                         </div>
 
@@ -103,12 +158,17 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </>
-              );
-            })}
+                );
+              })}
+            </div>
+            <ChevronRightIcon
+              id="right"
+              onClick={slideRight}
+              className="size-8 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-2"
+            ></ChevronRightIcon>
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }

@@ -10,8 +10,8 @@ import { NavLink } from "react-router-dom";
 import logo1 from "../assets/images/logo1.png";
 
 const navigation = [
-  { name: "Home", href: "/home" },
-  { name: "Library", href: "/library" },
+  { name: "HOME", href: "/home" },
+  { name: "LIBRARY", href: "/library" },
 ];
 
 function classNames(...classes) {
@@ -23,7 +23,7 @@ export default function Header(props) {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-zinc-900">
+      <Disclosure as="nav" className="bg-zinc-900 font-poppins">
         <div className="mx-auto max-w-screen-2xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -60,7 +60,7 @@ export default function Header(props) {
                       to={item.href}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -80,28 +80,28 @@ export default function Header(props) {
                       }}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
                         );
                       }}
                     >
-                      Logout
+                      LOGOUT
                     </NavLink>
                   ) : (
                     <NavLink
                       to="/login"
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-bold no-underline " +
+                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
                           (isActive
                             ? "bg-zinc-950 text-white"
                             : "text-gray-300 hover:bg-zinc-600 hover:text-white")
                         );
                       }}
                     >
-                      Login
+                      LOGIN
                     </NavLink>
                   )}
                 </div>
@@ -129,7 +129,7 @@ export default function Header(props) {
                 aria-current={item.current ? "page" : undefined}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
@@ -149,28 +149,28 @@ export default function Header(props) {
                 }}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
                   );
                 }}
               >
-                Logout
+                LOGOUT
               </NavLink>
             ) : (
               <NavLink
                 to="/login"
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-bold no-underline " +
+                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
                     (isActive
                       ? "bg-zinc-950 text-white"
                       : "text-gray-300 hover:bg-zinc-600 hover:text-white")
                   );
                 }}
               >
-                Login
+                LOGIN
               </NavLink>
             )}
           </div>

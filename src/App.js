@@ -6,10 +6,19 @@ import Home from "./pages/Home";
 import Library from "./pages/Library";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import WebFont from "webfontloader";
 
 export const LoginContext = createContext();
 
 function App() {
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Poppins"],
+      },
+    });
+  }, []);
+
   /* const [results, setResults] = useState([]);
   const [videos, setVideos] = useState({});
 
