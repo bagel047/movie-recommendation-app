@@ -8,6 +8,8 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import logo1 from "../assets/images/logo1.png";
+import SearchDropdown from "./SearchDropdown";
+import Search from "./Search";
 
 const navigation = [
   { name: "HOME", href: "/home" },
@@ -107,16 +109,55 @@ export default function Header(props) {
                 </div>
               </div>
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
+            {/* Bell <button
                 type="button"
                 className="relative rounded-full bg-zinc-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               >
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
                 <BellIcon aria-hidden="true" className="h-6 w-6" />
-              </button>
-            </div>
+              </button> */}
+
+            {/* //Search <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+              <form class="max-w-lg mx-auto border border-zinc-600 rounded">
+                <div class="flex">
+                  <SearchDropdown />
+
+                  <div class="relative md:min-w-96 lg:min-w-96 xl:min-w-96 2xl:w-96 sm:max-w-48">
+                    <input
+                      type="search"
+                      id="search-dropdown"
+                      class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-zinc-800 rounded-e-lg focus:ring-zinc-600 focus:border-zinc-500 dark:bg-zinc-800 dark:placeholder-zinc-400 dark:text-white dark:focus:border-zinc-600"
+                      placeholder="Search"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-zinc-950 rounded-e-lg hover:bg-zinc-700 focus:ring-4 focus:outline-none focus:ring-zinc-600 focus:border-zinc-500 dark:bg-zinc-950 dark:hover:bg-zinc-700 "
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                        />
+                      </svg>
+                      <span class="sr-only">Search</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div> */}
+            <Search />
           </div>
         </div>
 

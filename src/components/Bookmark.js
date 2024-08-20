@@ -10,7 +10,11 @@ export default function BookmarkIcon() {
   };
 
   return (
-    <div onClick={handleClick} className="hover:cursor-pointer">
+    <div
+      onClick={handleClick}
+      className="hover:cursor-pointer"
+      title="Add to Watchlist"
+    >
       {isClicked ? (
         <BookmarkIconSolid className="size-6 text-white"></BookmarkIconSolid>
       ) : (

@@ -1,5 +1,6 @@
 import MovieSlider from "./MovieSlider";
 import background from "../../assets/images/background.jpg";
+import TVSlider from "./TVSlider";
 
 export default function Home() {
   return (
@@ -14,9 +15,10 @@ export default function Home() {
         </h1>
       </div>
 
-      <MovieSlider name="Popular" category="popular"></MovieSlider>
+      <MovieSlider name="Popular Movies" category="popular"></MovieSlider>
       <MovieSlider name="Top Rated" category="top_rated"></MovieSlider>
       <MovieSlider name="Now Playing" category="now_playing"></MovieSlider>
+      <TVSlider name="Popular TV Shows" category="popularTV"></TVSlider>
     </div>
   );
 }

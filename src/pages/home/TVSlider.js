@@ -4,7 +4,7 @@ import Bookmark from "../../components/Bookmark";
 import StarRating from "../../components/StarRating";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-export default function MovieSlider(props) {
+export default function TVSlider(props) {
   const [results, setResults] = useState([]);
   const [details, setDetails] = useState({});
   const [fetchedDetails, setFetchedDetails] = useState(new Set());
@@ -14,7 +14,7 @@ export default function MovieSlider(props) {
   // Fetch page of results
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${
+      `https://api.themoviedb.org/3/tv/${
         props.category
       }?language=en-US&page=${page.toString()}`,
       options
@@ -32,17 +32,17 @@ export default function MovieSlider(props) {
       });
   }, [page]);
 
-  // Fetch movie details by movie id
+  //   Fetch movie details by movie id
   useEffect(() => {
     results.forEach((movie) => {
       if (!fetchedDetails.has(movie.id)) {
         fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}?language=en-US`,
+          `https://api.themoviedb.org/3/tv/${movie.id}?language=en-US`,
           options
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log("movie", data);
+            console.log("tv", data);
             setDetails((prev) => ({
               ...prev,
               [movie.id]: { data },
@@ -127,9 +127,9 @@ export default function MovieSlider(props) {
                       <a href="#">
                         <h5
                           className="pt-3 text-md text-white dark:text-white font-semibold truncate w-full overflow-hidden"
-                          title={movie.title}
+                          title={movie.name}
                         >
-                          {movie.title}
+                          {movie.name}
                         </h5>
                       </a>
                       <div className="flex items-center mt-2.5 mb-5">
@@ -167,12 +167,14 @@ export default function MovieSlider(props) {
                       <div className="flex items-end justify-between">
                         <div className="flex justify-between text-sm">
                           <span className="mr-2 text-gray-900 dark:text-slate-300">
-                            ({movie.release_date.substr(0, 4)})
+                            ({movie.first_air_date.substr(0, 4)})
                           </span>
 
                           <span className="text-gray-900 dark:text-slate-300">
-                            {details[movie.id]?.data.runtime
-                              ? details[movie.id].data.runtime + "m"
+                            {details[movie.id]?.data.number_of_seasons
+                              ? `Seasons: ${
+                                  details[movie.id].data.number_of_seasons
+                                }`
                               : "N/A"}
                           </span>
                         </div>
