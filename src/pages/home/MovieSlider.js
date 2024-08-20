@@ -1,98 +1,82 @@
-import { useCallback, useEffect, useState } from "react";
-import { options } from "../shared";
-import background from "../assets/images/background.jpg";
-import Bookmark from "../components/Bookmark";
-import StarRating from "../components/StarRating";
+import { useEffect, useState } from "react";
+import { options } from "../../shared";
+import Bookmark from "../../components/Bookmark";
+import StarRating from "../../components/StarRating";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-export default function Home() {
-  const [nowPlaying, setNowPlaying] = useState([]);
+export default function MovieSlider(props) {
+  const [results, setResults] = useState([]);
   const [details, setDetails] = useState({});
+  const [fetchedDetails, setFetchedDetails] = useState(new Set());
   let [clicks, setClicks] = useState(0);
   let [page, setPage] = useState(1);
 
+  // Fetch page of results
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      options
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setNowPlaying(data.results);
-      });
-  }, []);
-
-  useEffect(() => {
-    nowPlaying.forEach((movie) => {
-      fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}?language=en-US`,
-        options
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setDetails((prev) => ({
-            ...prev,
-            [movie.id]: { data },
-          }));
-        });
-    });
-  }, [nowPlaying]);
-
-  // Fetch +20 movies od Now Playing
-  useEffect(() => {
-    console.log(typeof page, page);
-    fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page.toString()}`,
+      `https://api.themoviedb.org/3/movie/${
+        props.category
+      }?language=en-US&page=${page.toString()}`,
       options
     )
       .then((response) => response.json())
       .then((data) => {
-        let temp = [...nowPlaying];
+        let temp = [...results];
         data.results.forEach((result) => {
-          temp.push(result);
+          if (!fetchedDetails.has(result.id)) {
+            temp.push(result);
+          }
         });
         // console.log(temp);
-        setNowPlaying(temp);
+        setResults(temp);
       });
   }, [page]);
 
+  // Fetch movie details by movie id
+  useEffect(() => {
+    results.forEach((movie) => {
+      if (!fetchedDetails.has(movie.id)) {
+        fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}?language=en-US`,
+          options
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setDetails((prev) => ({
+              ...prev,
+              [movie.id]: { data },
+            }));
+            setFetchedDetails((prev) => new Set(prev).add(movie.id)); // Update fetched IDs
+          });
+      }
+    });
+  }, [results]);
+
   const slideLeft = () => {
-    const slider = document.querySelector("#slider");
+    const sliderId = "slider-" + props.category;
+    const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
   const slideRight = () => {
-    const slider = document.querySelector("#slider");
+    const sliderId = "slider-" + props.category;
+    const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft + 500;
     setClicks(clicks + 1);
   };
 
   useEffect(() => {
-    console.log("in useeffect for clicks", clicks);
     if (clicks === 7) {
       setClicks(0);
       setPage(page + 1);
-      console.log("7 clicks");
     }
   }, [clicks]);
 
   return (
-    <div className="font-poppins">
-      <div className="relative mb-32">
-        <img
-          src={background}
-          className="max-h-96 w-full object-cover mix-blend-overlay"
-        ></img>
-        <h1 className="absolute bottom-8 left-8 font-bold text-4xl">
-          Discover and keep track of movies and TV shows in one place
-        </h1>
-      </div>
-
-      {nowPlaying ? (
+    <>
+      {results ? (
         <div className="divide-y divide-zinc-600">
-          <h2 className="mb-3 font-semibold text-xl">Now Playing</h2>
+          <h2 className="mb-3 font-semibold text-xl">{props.name}</h2>
 
           <div className="flex justify-between bg-zinc-900 shadow-md shadow-zinc-950">
             <ChevronLeftIcon
@@ -100,10 +84,10 @@ export default function Home() {
               className="size-8 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-2"
             ></ChevronLeftIcon>
             <div
-              id="slider"
+              id={"slider-" + props.category}
               className="p-5 w-full h-full overflow-x-scroll scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overscroll-contain snap-x snap-mandatory"
             >
-              {nowPlaying.map((movie) => {
+              {results.map((movie) => {
                 return (
                   <div
                     key={movie.id}
@@ -169,6 +153,6 @@ export default function Home() {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 }

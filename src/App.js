@@ -2,10 +2,10 @@ import "./App.css";
 import { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import Library from "./pages/Library";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Home from "./pages/home/Home";
+import Library from "./pages/library/Library";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 import WebFont from "webfontloader";
 
 export const LoginContext = createContext();
