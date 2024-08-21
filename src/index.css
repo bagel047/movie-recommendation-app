@@ -5,3 +5,8 @@
 .font-poppins {
   font-family: "Poppins";
 }
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
