@@ -7,6 +7,7 @@ import HeartIcon from "../components/Heart";
 import TrailerButton from "../components/TrailerButton";
 import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
+import MovieSlider from "./home/MovieSlider";
 
 export default function Movie() {
   const { id } = useParams();
@@ -31,7 +32,7 @@ export default function Movie() {
         setReviews(data.reviews.results);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
@@ -73,19 +74,22 @@ export default function Movie() {
   return (
     <>
       <div className="w-full relative">
-        <img src={backdropUrl} className="w-full mix-blend-overlay"></img>
+        <img
+          src={backdropUrl}
+          className="h-[720px] w-full object-cover mix-blend-overlay"
+        ></img>
 
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent px-48">
-          <div className="w-1/3 mr-6">
+        <div className="absolute top-0 left-0 w-full h-[720px] flex flex-wrap justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent md:px-48 lg:px-48 sm:px-4">
+          <div className="md:w-1/3 lg:w-1/3 p-2">
             <img
               src={`https://image.tmdb.org/t/p/w500/${
                 images.posters ? images.posters[0].file_path : null
               }`}
-              className="w-full h-auto"
+              className="w-full md:h-auto"
             ></img>
           </div>
 
-          <div className="w-2/3">
+          <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
             <h1 className="font-bold text-7xl">{details.title}</h1>
             <div className="mt-4 text-justify">
               <p>
@@ -112,7 +116,7 @@ export default function Movie() {
               </div>
             </div>
 
-            <div className="flex flex-col w-fit border-l-2 px-2 mt-4 border-red-800">
+            <div className="flex flex-col w-fit border-l-2 px-2 py-1 mt-4 border-red-800">
               <div className="mb-1.5">
                 <HeartIcon></HeartIcon>
               </div>
@@ -129,24 +133,24 @@ export default function Movie() {
         </div>
       </div>
 
-      <div className="w-full flex mt-4 mb-12 justify-between">
-        <div className="w-3/4 h-full bg-zinc-900 p-8 rounded-md">
+      {/* Cast and Reviews section*/}
+      <div className="w-full flex mt-4 justify-between">
+        <div className="h-full md:w-3/4 lg:w-3/4 sm:w-full bg-zinc-900 p-8 rounded-md">
           <h2 className="font-bold text-2xl text-red-600 mb-6">Cast</h2>
-
           <div className="h-full flex overflow-x-scroll scrollbar scroll-smooth whitespace-nowrap">
             {credits.cast
               ? credits.cast.map((actor) => {
-                  return <PersonCard data={actor} />;
+                  return <PersonCard key={actor.id} data={actor} />;
                 })
               : "N/A"}
           </div>
         </div>
-        <div className="w-1/4 ml-2 bg-zinc-900 p-8 rounded-md">
+        <div className="md:w-1/4 lg:w-1/4 sm:w-full bg-zinc-900 p-8 rounded-md ml-2">
           <h2 className="font-bold text-2xl text-red-600 mb-6">Reviews</h2>
           <div className="max-h-64 pr-2 flex flex-col scrollable-container overflow-y-auto scrollbar scroll-smooth whitespace-nowrap">
             {reviews.length > 0 ? (
               reviews.map((review) => {
-                return <Review data={review} />;
+                return <Review key={review.id} data={review} />;
               })
             ) : (
               <span className="font-xs text-zinc-300">
@@ -155,6 +159,20 @@ export default function Movie() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* Recommendations section*/}
+      <div className="w-full mt-4 bg-zinc-900 p-8 rounded-md">
+        <h2 className="font-bold text-2xl text-red-600 mb-6">
+          Recommendations based on{" "}
+          <span className="italic text-white text-xl">"{details.title}"</span>
+        </h2>
+        <MovieSlider
+          name="Recommendations"
+          category={`${id}/recommendations`}
+          categoryFix={`${id}-recommendations`}
+          type="movie"
+        />
       </div>
     </>
   );
