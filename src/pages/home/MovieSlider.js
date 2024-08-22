@@ -61,14 +61,14 @@ export default function MovieSlider(props) {
         <div className="divide-y divide-zinc-600">
           {/* <h2 className="mb-3 font-semibold text-lg">{props.name}</h2> */}
 
-          <div className="flex justify-between bg-zinc-900 shadow-lg shadow-zinc-900 pt-1 pb-1 rounded-sm">
+          <div className="p-1 flex justify-between bg-zinc-900 rounded-sm">
             <ChevronLeftIcon
               onClick={slideLeft}
-              className="size-12 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 bg-zinc-950 p-2 rounded-xl"
+              className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 rounded-xl"
             ></ChevronLeftIcon>
             <div
               id={`slider-${props.category}-${props.type}`}
-              className="p-5 w-full h-full overflow-x-scroll scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
+              className="p-2 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
             >
               {results.map((movie) => {
                 return (
@@ -85,7 +85,7 @@ export default function MovieSlider(props) {
             <ChevronRightIcon
               id="right"
               onClick={slideRight}
-              className="size-12 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 bg-zinc-950 p-2 rounded-xl ml-2"
+              className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 bg-zinc-950 p-1 rounded-xl ml-2"
             ></ChevronRightIcon>
           </div>
         </div>

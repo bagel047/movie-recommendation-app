@@ -10,3 +10,31 @@
   box-sizing: border-box;
   font-family: "Poppins";
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: #26262a;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    width: 8px;
+    background: #981b1a;
+    border-radius: 20px;
+    /* border: 1px solid #f6f7ed; */
+  }
+
+  .scrollbar::-webkit-scrollbar-track:hover {
+    border-radius: 20px;
+    background: #26262a;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+  }
+}
