@@ -8,15 +8,19 @@ import TrailerButton from "../components/TrailerButton";
 import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
 import MovieSlider from "./home/MovieSlider";
+import { parse, format } from "date-fns";
 
 export default function Movie() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [images, setImages] = useState({});
-  const [videos, setVideos] = useState("");
+  const [videos, setVideos] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [credits, setCredits] = useState({});
   const [reviews, setReviews] = useState([]);
+
+  const [runtime, setRuntime] = useState("");
+  const [releaseDate, setReleaseDate] = useState();
 
   useEffect(() => {
     fetch(
@@ -43,10 +47,28 @@ export default function Movie() {
       .catch((err) => console.error(err));
 
     // trailer url
-    if (videos) {
-      videos.forEach((video) => {
-        if (video.name === "Official Trailer") setTrailerUrl(video.key);
-      });
+    if (videos && videos.length > 0) {
+      for (let video of videos) {
+        if (video.name.toLowerCase().includes("official trailer")) {
+          setTrailerUrl(video.key);
+          break;
+        } else if (video.name.toLowerCase().includes("trailer")) {
+          setTrailerUrl(video.key);
+        }
+      }
+    }
+
+    // runtime format in hours, minutes
+    if (details.runtime) {
+      let hours = Math.floor(details.runtime / 60);
+      let minutes = details.runtime % 60;
+      setRuntime(`${hours}h ${minutes}m`);
+    }
+
+    // release date format
+    if (details.release_date) {
+      const date = parse(details.release_date, "yyyy-MM-dd", new Date());
+      setReleaseDate(format(date, "dd/MM/yyyy"));
     }
   }, [details, videos]);
 
@@ -71,6 +93,9 @@ export default function Movie() {
     }
   }
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const overviewLimit = 280;
+
   return (
     <>
       <div className="w-full relative">
@@ -83,19 +108,60 @@ export default function Movie() {
           <div className="md:w-1/3 lg:w-1/3 p-2">
             <img
               src={`https://image.tmdb.org/t/p/w500/${
-                images.posters ? images.posters[0].file_path : null
+                images.posters && images.posters.length > 0
+                  ? images.posters[0].file_path
+                  : null
               }`}
+              alt={`${details.title} Poster`}
               className="w-full md:h-auto"
             ></img>
           </div>
 
           <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
             <h1 className="font-bold text-7xl">{details.title}</h1>
+            <span className="text-sm text-zinc-300 inline-block pr-2">
+              &middot; {releaseDate ? releaseDate : ""}
+            </span>
+            <span className="text-sm text-zinc-300 inline-block pr-2">
+              &middot;{" "}
+              {details.genres && details.genres.length > 0
+                ? details.genres.map((genre, i) => {
+                    return `${genre.name}${
+                      i + 1 != details.genres.length ? ", " : ""
+                    }`;
+                  })
+                : "Genres not available"}
+            </span>
+            <span className="text-sm text-zinc-300 inline-block">
+              &middot; {runtime ? runtime : "N/A"}
+            </span>
             <div className="mt-4 text-justify">
               <p>
-                <span className="block font-bold text-lg">Overview</span>
-                <span className="text-sm">{details.overview}</span>
+                {details.overview ? (
+                  <>
+                    <span className="block font-bold text-lg">Overview</span>
+                    <span className="text-sm">
+                      {isExpanded
+                        ? details.overview
+                        : details.overview.slice(0, overviewLimit) +
+                          (details.overview.length > overviewLimit
+                            ? "..."
+                            : "")}
+                      {details.overview.length > overviewLimit && (
+                        <span
+                          onClick={() => setIsExpanded(!isExpanded)}
+                          className="inline-block text-white hover:underline hover:cursor-pointer pl-1"
+                        >
+                          {isExpanded ? " read less" : " read more"}
+                        </span>
+                      )}
+                    </span>
+                  </>
+                ) : (
+                  "Overview not available for this movie."
+                )}
               </p>
+
               <div className="flex items-center mt-2.5 mb-5">
                 <StarRating rating={details?.vote_average || 0} />
 
@@ -138,11 +204,11 @@ export default function Movie() {
         <div className="h-full md:w-3/4 lg:w-3/4 sm:w-full bg-zinc-900 p-8 rounded-md">
           <h2 className="font-bold text-2xl text-red-600 mb-6">Cast</h2>
           <div className="h-full flex overflow-x-scroll scrollbar scroll-smooth whitespace-nowrap">
-            {credits.cast
+            {credits.cast && credits.cast.length > 0
               ? credits.cast.map((actor) => {
                   return <PersonCard key={actor.id} data={actor} />;
                 })
-              : "N/A"}
+              : "Cast is not available for this movie."}
           </div>
         </div>
         <div className="md:w-1/4 lg:w-1/4 sm:w-full bg-zinc-900 p-8 rounded-md ml-2">
@@ -154,7 +220,7 @@ export default function Movie() {
               })
             ) : (
               <span className="font-xs text-zinc-300">
-                No reviews available
+                No reviews available.
               </span>
             )}
           </div>
