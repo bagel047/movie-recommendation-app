@@ -26,7 +26,7 @@ export default function MovieSlider(props) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, category);
+        console.log(data, props.category);
         let temp = [...results];
         data.results.forEach((result) => {
           if (!fetchedDetails.has(result.id)) {
@@ -38,22 +38,30 @@ export default function MovieSlider(props) {
       });
   }, [page, category]);
 
+  useEffect(() => {
+    setResults([]);
+    setFetchedDetails(new Set());
+    setPage(1);
+    setCategory(props.category);
+    setCategoryFix(props.categoryFix);
+  }, [props.category]);
+
   function updateFetchedDetails(newValue) {
     setFetchedDetails(newValue);
   }
 
   const slideLeft = () => {
-    const sliderId = `slider-${categoryFix != null ? categoryFix : category}-${
-      props.type
-    }`;
+    const sliderId = `slider-${
+      props.category != null ? props.categoryFix : props.category
+    }-${props.type}`;
     const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
   const slideRight = () => {
-    const sliderId = `slider-${categoryFix != null ? categoryFix : category}-${
-      props.type
-    }`;
+    const sliderId = `slider-${
+      props.categoryFix != null ? props.categoryFix : props.category
+    }-${props.type}`;
     const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft + 500;
     setClicks(clicks + 1);
@@ -78,9 +86,9 @@ export default function MovieSlider(props) {
               className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 p-1"
             ></ChevronLeftIcon>
             <div
-              id={`slider-${categoryFix != null ? categoryFix : category}-${
-                props.type
-              }`}
+              id={`slider-${
+                props.categoryFix != null ? props.categoryFix : props.category
+              }-${props.type}`}
               className="p-2 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory bg-gradient-to-b from-zinc-950 to-zinc-900"
             >
               {results.map((movie) => {

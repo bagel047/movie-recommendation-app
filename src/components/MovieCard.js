@@ -55,56 +55,64 @@ export default function MovieCard(props) {
   }
 
   return (
-    <div className="mr-1 w-56 h-fit bg-inherit inline-block snap-start hover:bg-zinc-800 hover:scale-[1.06] ease-in-out duration-150 p-2 rounded-md">
-      <div className="relative w-full overflow-hidden">
-        <img
-          id="moviePoster"
-          className="rounded-t-sm aspect-video object-cover w-full h-full"
-          src={"https://image.tmdb.org/t/p/w500" + props.data?.poster_path}
-          alt={name + " Poster"}
-        />
-      </div>
-      <div className="w-full">
-        <h5
-          className="pt-3 text-md text-white dark:text-white font-semibold truncate w-full overflow-hidden"
-          title={name}
-        >
-          {name}
-        </h5>
-        <span className="mr-2 text-gray-900 dark:text-slate-300 text-xs">
-          {details?.genres[0] ? details.genres[0].name : null}
-          {details?.genres[1] ? ", " + details.genres[1].name : null}
-        </span>
-        <div className="flex items-center mt-2.5 mb-5">
-          <StarRating rating={details?.vote_average || 0} />
-
-          <span
-            title="Rating"
-            className={`text-xs font-semibold px-2.5 py-0.5 rounded ms-3 ${
-              isNaN(Math.round(details?.vote_average * 10) / 10)
-                ? "bg-gray-200 text-gray-800 dark:bg-gray-300 dark:text-gray-800"
-                : getRatingColor(Math.round(details?.vote_average * 10) / 10)
-            }`}
-          >
-            {isNaN(Math.round(details?.vote_average * 10) / 10)
-              ? "N/A"
-              : Math.round(details?.vote_average * 10) / 10}
-          </span>
-        </div>
-        <div className="flex items-end justify-between">
-          <div className="flex justify-between text-sm">
-            <span className="mr-2 text-gray-900 dark:text-slate-300">
-              ({releaseDate ? releaseDate.substring(0, 4) : "N/A"})
-            </span>
-
-            <span className="text-gray-900 dark:text-slate-300">
-              {props.type === "movie" ? runtime + "m" : "Seasons: " + seasons}
-            </span>
+    <>
+      {details ? (
+        <div className="mr-1 w-56 h-fit bg-inherit inline-block snap-start hover:bg-zinc-800 hover:scale-[1.06] ease-in-out duration-150 p-2 rounded-md">
+          <div className="relative w-full overflow-hidden">
+            <img
+              id="moviePoster"
+              className="rounded-t-sm aspect-video object-cover w-full h-full"
+              src={"https://image.tmdb.org/t/p/w500" + props.data?.poster_path}
+              alt={name + " Poster"}
+            />
           </div>
+          <div className="w-full">
+            <h5
+              className="pt-3 text-md text-white dark:text-white font-semibold truncate w-full overflow-hidden"
+              title={name}
+            >
+              {name}
+            </h5>
+            <span className="mr-2 text-gray-900 dark:text-slate-300 text-xs">
+              {details?.genres[0] ? details.genres[0].name : null}
+              {details?.genres[1] ? ", " + details.genres[1].name : null}
+            </span>
+            <div className="flex items-center mt-2.5 mb-5">
+              <StarRating rating={details?.vote_average || 0} />
 
-          <Bookmark></Bookmark>
+              <span
+                title="Rating"
+                className={`text-xs font-semibold px-2.5 py-0.5 rounded ms-3 ${
+                  isNaN(Math.round(details?.vote_average * 10) / 10)
+                    ? "bg-gray-200 text-gray-800 dark:bg-gray-300 dark:text-gray-800"
+                    : getRatingColor(
+                        Math.round(details?.vote_average * 10) / 10
+                      )
+                }`}
+              >
+                {isNaN(Math.round(details?.vote_average * 10) / 10)
+                  ? "N/A"
+                  : Math.round(details?.vote_average * 10) / 10}
+              </span>
+            </div>
+            <div className="flex items-end justify-between">
+              <div className="flex justify-between text-sm">
+                <span className="mr-2 text-gray-900 dark:text-slate-300">
+                  ({releaseDate ? releaseDate.substring(0, 4) : "N/A"})
+                </span>
+
+                <span className="text-gray-900 dark:text-slate-300">
+                  {props.type === "movie"
+                    ? runtime + "m"
+                    : "Seasons: " + seasons}
+                </span>
+              </div>
+
+              <Bookmark></Bookmark>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   );
 }
