@@ -24,8 +24,16 @@ export default function SeasonsDropdown(props) {
   }, []);
 
   useEffect(() => {
-    setSeasons(props.seasons?.slice(1) || []);
+    if (props.seasons && props.seasons[0]?.name === "Specials") {
+      setSeasons(props.seasons.slice(1) || []);
+    } else {
+      setSeasons(props.seasons);
+    }
   }, [props.seasons]);
+
+  useEffect(() => {
+    console.log(seasons);
+  }, [seasons]);
 
   return (
     <>
@@ -71,14 +79,10 @@ export default function SeasonsDropdown(props) {
                         <Link
                           to={`/tv/${props.tvID}/season/${index + 1}`}
                           key={index + 1}
+                          className="no-underline"
                         >
-                          <li>
-                            <a
-                              href="#"
-                              className="rounded-md block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-950 dark:hover:text-white text-white no-underline"
-                            >
-                              Season {index + 1}
-                            </a>
+                          <li className="rounded-md block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-950 dark:hover:text-white text-white">
+                            Season {index + 1}
                           </li>
                         </Link>
                       );

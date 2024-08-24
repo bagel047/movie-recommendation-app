@@ -15,7 +15,7 @@ export default function TVShow() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [videos, setVideos] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
+  const [trailerKey, setTrailerKey] = useState("");
   const [credits, setCredits] = useState({});
   const [reviews, setReviews] = useState([]);
 
@@ -47,22 +47,22 @@ export default function TVShow() {
     //     })
     //     .catch((err) => console.error(err));
 
-    // trailer url
-    let url = "";
+    // trailer key
+    let key = "";
     let hasTrailer = false;
     if (videos && videos.length > 0) {
       for (let video of videos) {
         if (video.name.toLowerCase().includes("official trailer")) {
-          url = video.key;
+          key = video.key;
           hasTrailer = true;
           break;
         } else if (video.name.toLowerCase().includes("trailer")) {
-          url = video.key;
+          key = video.key;
           hasTrailer = true;
         }
       }
-      if (!hasTrailer) url = videos[0].key;
-      setTrailerUrl(url);
+      if (!hasTrailer) key = videos[0].key;
+      setTrailerKey(key);
     }
 
     // first air date format
@@ -117,7 +117,7 @@ export default function TVShow() {
           <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
             <h1 className="font-bold text-6xl">{details.name}</h1>
             <span className="text-sm text-zinc-300 inline-block pr-2">
-              &middot; {firstAirDate ? firstAirDate : ""}
+              &middot; First air date: {firstAirDate ? firstAirDate : ""}
             </span>
             <span className="text-sm text-zinc-300 inline-block pr-2">
               &middot;{" "}
@@ -156,7 +156,7 @@ export default function TVShow() {
                     </span>
                   </>
                 ) : (
-                  "Overview not available for this movie."
+                  "Overview not available for this TV show."
                 )}
               </p>
 
@@ -191,7 +191,7 @@ export default function TVShow() {
 
             <div className="mt-4 flex w-full items-center gap-2.5">
               <TrailerButton
-                trailerUrl={trailerUrl}
+                trailerKey={trailerKey}
                 details={details}
               ></TrailerButton>
 

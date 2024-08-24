@@ -30,7 +30,7 @@ export default function TrailerButton(props) {
         <Modal.Body className="p-0">
           <div className="relative w-full h-0 pb-[56.25%]">
             <iframe
-              src={`https://www.youtube.com/embed/${props.trailerUrl}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${props.trailerKey}?autoplay=1`}
               title="Trailer"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
