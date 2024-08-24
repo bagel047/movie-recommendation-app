@@ -61,7 +61,7 @@ export default function MovieCard(props) {
           <div className="relative w-full overflow-hidden">
             <img
               id="moviePoster"
-              className="rounded-t-sm aspect-video object-cover w-full h-full"
+              className="rounded-tl-md rounded-tr-md aspect-video object-cover w-full h-full"
               src={"https://image.tmdb.org/t/p/w500" + props.data?.poster_path}
               alt={name + " Poster"}
             />

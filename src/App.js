@@ -8,6 +8,8 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import WebFont from "webfontloader";
 import Movie from "./pages/Movie";
+import TVShow from "./pages/TVShow";
+import Season from "./pages/Season";
 
 export const LoginContext = createContext();
 
@@ -79,6 +81,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/movie/:id" element={<Movie />} />
+            <Route path="/tv/:id" element={<TVShow />} />
+            <Route path="/tv/:id/season/:seasonID" element={<Season />} />
             <Route path="/library" element={<Library></Library>} />
             <Route path="/login" element={<Login></Login>} />
             <Route path="/register" element={<Register></Register>} />

@@ -42,6 +42,7 @@ export default function MovieSlider(props) {
     setResults([]);
     setFetchedDetails(new Set());
     setPage(1);
+    setClicks(0);
     setCategory(props.category);
     setCategoryFix(props.categoryFix);
   }, [props.category]);
@@ -51,17 +52,17 @@ export default function MovieSlider(props) {
   }
 
   const slideLeft = () => {
-    const sliderId = `slider-${
-      props.category != null ? props.categoryFix : props.category
-    }-${props.type}`;
+    const sliderId = `slider-${categoryFix != null ? categoryFix : category}-${
+      props.type
+    }`;
     const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
   const slideRight = () => {
-    const sliderId = `slider-${
-      props.categoryFix != null ? props.categoryFix : props.category
-    }-${props.type}`;
+    const sliderId = `slider-${categoryFix != null ? categoryFix : category}-${
+      props.type
+    }`;
     const slider = document.querySelector(`#${sliderId}`);
     slider.scrollLeft = slider.scrollLeft + 500;
     setClicks(clicks + 1);
@@ -80,20 +81,20 @@ export default function MovieSlider(props) {
         <div className="">
           {/* <h2 className="mb-3 font-semibold text-lg">{props.name}</h2> */}
 
-          <div className="p-1 flex justify-between">
+          <div className="flex justify-between">
             <ChevronLeftIcon
               onClick={slideLeft}
               className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 p-1"
             ></ChevronLeftIcon>
             <div
-              id={`slider-${
-                props.categoryFix != null ? props.categoryFix : props.category
-              }-${props.type}`}
-              className="p-2 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory bg-gradient-to-b from-zinc-950 to-zinc-900"
+              id={`slider-${categoryFix != null ? categoryFix : category}-${
+                props.type
+              }`}
+              className="p-3 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory bg-gradient-to-b from-zinc-950 to-zinc-900"
             >
               {results.map((movie) => {
                 return (
-                  <Link to={"/movie/" + movie.id} key={movie.id}>
+                  <Link to={`/${props.type}/${movie.id}`} key={movie.id}>
                     <MovieCard
                       data={movie}
                       type={props.type}

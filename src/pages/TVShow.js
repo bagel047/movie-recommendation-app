@@ -9,22 +9,22 @@ import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
 import MovieSlider from "./home/MovieSlider";
 import { parse, format } from "date-fns";
+import SeasonsDropdown from "../components/SeasonsDropdown";
 
-export default function Movie() {
+export default function TVShow() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
-  const [images, setImages] = useState({});
   const [videos, setVideos] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [credits, setCredits] = useState({});
   const [reviews, setReviews] = useState([]);
 
-  const [runtime, setRuntime] = useState("");
-  const [releaseDate, setReleaseDate] = useState();
+  const [seasons, setSeasons] = useState([]);
+  const [firstAirDate, setFirstAirDate] = useState("");
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos%2Creviews%2Crecommendations%2Ccredits&language=en-US`,
+      `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos%2Creviews%2Crecommendations%2Ccredits&language=en-US`,
       options
     )
       .then((response) => response.json())
@@ -34,17 +34,18 @@ export default function Movie() {
         setVideos(data.videos.results);
         setCredits(data.credits);
         setReviews(data.reviews.results);
+        setSeasons(data.seasons);
       })
       .catch((error) => console.error(error));
   }, [id]);
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data);
-      })
-      .catch((err) => console.error(err));
+    //   fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       setImages(data);
+    //     })
+    //     .catch((err) => console.error(err));
 
     // trailer url
     let url = "";
@@ -64,24 +65,16 @@ export default function Movie() {
       setTrailerUrl(url);
     }
 
-    // runtime format in hours, minutes
-    if (details.runtime) {
-      let hours = Math.floor(details.runtime / 60);
-      let minutes = details.runtime % 60;
-      setRuntime(`${hours}h ${minutes}m`);
-    }
-
-    // release date format
-    if (details.release_date) {
-      const date = parse(details.release_date, "yyyy-MM-dd", new Date());
-      setReleaseDate(format(date, "dd/MM/yyyy"));
+    // first air date format
+    if (details.first_air_date) {
+      const date = parse(details.first_air_date, "yyyy-MM-dd", new Date());
+      setFirstAirDate(format(date, "dd/MM/yyyy"));
     }
   }, [details, videos]);
 
-  const backdropUrl =
-    images.backdrops && images.backdrops.length > 0
-      ? `https://image.tmdb.org/t/p/original${images.backdrops[0].file_path}`
-      : "";
+  const backdropUrl = details?.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${details.backdrop_path}`
+    : "";
 
   function getRatingColor(rating) {
     if (rating >= 8) {
@@ -114,19 +107,17 @@ export default function Movie() {
           <div className="md:w-1/3 lg:w-1/3 p-2">
             <img
               src={`https://image.tmdb.org/t/p/w500/${
-                images.posters && images.posters.length > 0
-                  ? images.posters[0].file_path
-                  : null
+                details.poster_path ? details.poster_path : null
               }`}
-              alt={`${details.title} Poster`}
+              alt={`${details.name} Poster`}
               className="w-full md:h-auto"
             ></img>
           </div>
 
           <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
-            <h1 className="font-bold text-6xl">{details.title}</h1>
+            <h1 className="font-bold text-6xl">{details.name}</h1>
             <span className="text-sm text-zinc-300 inline-block pr-2">
-              &middot; {releaseDate ? releaseDate : ""}
+              &middot; {firstAirDate ? firstAirDate : ""}
             </span>
             <span className="text-sm text-zinc-300 inline-block pr-2">
               &middot;{" "}
@@ -139,7 +130,8 @@ export default function Movie() {
                 : "Genres not available"}
             </span>
             <span className="text-sm text-zinc-300 inline-block">
-              &middot; {runtime ? runtime : "N/A"}
+              &middot; Seasons:{" "}
+              {details?.number_of_seasons ? details.number_of_seasons : "N/A"}
             </span>
             <div className="mt-4 text-justify">
               <p>
@@ -197,10 +189,14 @@ export default function Movie() {
               </div>
             </div>
 
-            <TrailerButton
-              trailerUrl={trailerUrl}
-              details={details}
-            ></TrailerButton>
+            <div className="mt-4 flex w-full items-center gap-2.5">
+              <TrailerButton
+                trailerUrl={trailerUrl}
+                details={details}
+              ></TrailerButton>
+
+              <SeasonsDropdown tvID={id} seasons={seasons}></SeasonsDropdown>
+            </div>
           </div>
         </div>
       </div>
@@ -214,7 +210,7 @@ export default function Movie() {
               ? credits.cast.map((actor) => {
                   return <PersonCard key={actor.id} data={actor} />;
                 })
-              : "Cast is not available for this movie."}
+              : "Cast is not available for this TV show."}
           </div>
         </div>
         <div className="md:w-1/4 lg:w-1/4 sm:w-full bg-zinc-900 p-8 rounded-md ml-2">
@@ -237,13 +233,13 @@ export default function Movie() {
       <div className="w-full mt-4 bg-zinc-900 p-8 rounded-md">
         <h2 className="font-bold text-2xl text-red-600 mb-6">
           Recommendations based on{" "}
-          <span className="italic text-white text-xl">"{details.title}"</span>
+          <span className="italic text-white text-xl">"{details.name}"</span>
         </h2>
         <MovieSlider
           name="Recommendations"
           category={`${id}/recommendations`}
           categoryFix={`${id}-recommendations`}
-          type="movie"
+          type="tv"
         />
       </div>
     </>

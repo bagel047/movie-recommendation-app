@@ -13,7 +13,7 @@ export default function TrailerButton(props) {
     <>
       <button
         onClick={toggleShow}
-        className="mt-4 text-center text-sm bg-red-800 hover:bg-red-900 rounded-3xl px-6 py-3"
+        className="text-center text-sm bg-red-800 hover:bg-red-900 rounded-3xl px-6 py-3"
       >
         Play trailer
       </button>

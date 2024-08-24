@@ -52,18 +52,18 @@ export default function SearchDropdown() {
         {show ? (
           <div
             id="dropdown"
-            className="px-2 absolute z-10 divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-zinc-950"
+            className="absolute z-10 divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-zinc-950"
           >
             <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDefaultButton"
             >
-              <div className="divide divide-y divide-zinc-700">
+              <div className="divide divide-y divide-zinc-700 p-2">
                 <div>
                   <li>
                     <a
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       All
                     </a>
@@ -73,7 +73,7 @@ export default function SearchDropdown() {
                   <li>
                     <a
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       Movies
                     </a>
@@ -81,7 +81,7 @@ export default function SearchDropdown() {
                   <li>
                     <a
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       TV
                     </a>
@@ -89,7 +89,7 @@ export default function SearchDropdown() {
                   <li>
                     <a
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       People
                     </a>
@@ -97,7 +97,7 @@ export default function SearchDropdown() {
                   <li>
                     <a
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       Keywords
                     </a>
