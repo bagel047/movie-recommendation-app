@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function Result(props) {
-  const [data, setData] = useState(props.data);
   const media_type = props.data?.media_type;
   const [name, setName] = useState(
     media_type === "movie" ? props.data?.title : props.data?.name
@@ -9,31 +8,29 @@ export default function Result(props) {
   const [info1, setInfo1] = useState(() => {
     if (media_type === "person") {
       return props.data?.known_for_department || "N/A";
-    }
-    if (media_type === "movie") {
-      return props.data?.release_date
-        ? props.data.release_date.substr(0, 4)
+    } else {
+      return props.data?.release_date || props.data?.first_air_date
+        ? props.data.release_date?.substr(0, 4) ||
+            props.data.first_air_date?.substr(0, 4)
         : "N/A";
     }
-    return props.data?.first_air_date
-      ? props.data.first_air_date.substr(0, 4)
-      : "N/A";
   });
 
-  const [info2, setInfo2] = useState(
-    media_type && media_type === "person"
-      ? props.data?.known_for[0]?.title || props.data?.known_for[0]?.name
-      : media_type
-  );
+  const [info2, setInfo2] = useState(() => {
+    if (media_type === "person") {
+      return (
+        props.data?.known_for?.[0]?.title ||
+        props.data?.known_for?.[0]?.name ||
+        "N/A"
+      );
+    }
+    return props.filter === "multi" ? media_type : props.filter;
+  });
 
-  useEffect(() => {
-    setData(props.data);
-  }, [props.data]);
-
-  const img = data?.poster_path
-    ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-    : data?.profile_path
-    ? `https://image.tmdb.org/t/p/w500${data.profile_path}`
+  const img = props.data?.poster_path
+    ? `https://image.tmdb.org/t/p/w500${props.data.poster_path}`
+    : props.data?.profile_path
+    ? `https://image.tmdb.org/t/p/w500${props.data.profile_path}`
     : `https://static.vecteezy.com/system/resources/thumbnails/020/911/746/small/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png`;
 
   return (

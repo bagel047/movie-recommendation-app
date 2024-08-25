@@ -22,7 +22,7 @@ export default function Results() {
         setResults(data.results);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [filter, search]);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function Results() {
                   to={`/${result.media_type}/${result.id}`}
                   className="no-underline text-white"
                 >
-                  <Result data={result} />
+                  <Result data={result} filter={filter} />
                 </Link>
               );
             })
