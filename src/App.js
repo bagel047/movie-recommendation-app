@@ -10,6 +10,7 @@ import WebFont from "webfontloader";
 import Movie from "./pages/Movie";
 import TVShow from "./pages/TVShow";
 import Season from "./pages/Season";
+import Results from "./pages/Results";
 
 export const LoginContext = createContext();
 
@@ -83,6 +84,7 @@ function App() {
             <Route path="/movie/:id" element={<Movie />} />
             <Route path="/tv/:id" element={<TVShow />} />
             <Route path="/tv/:tvID/season/:seasonID" element={<Season />} />
+            <Route path="/results/:filter/:search" element={<Results />} />
             <Route path="/library" element={<Library></Library>} />
             <Route path="/login" element={<Login></Login>} />
             <Route path="/register" element={<Register></Register>} />

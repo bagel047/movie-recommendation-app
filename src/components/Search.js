@@ -1,8 +1,14 @@
+import { useEffect, useState } from "react";
 import SearchDropdown from "./SearchDropdown";
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
+  const [input, setInput] = useState("");
+  const [searchFilter, setSearchFilter] = useState("multi");
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
-    console.log("handling submit");
+    navigate(`/results/${searchFilter}/${input}`);
   };
 
   return (
@@ -16,8 +22,11 @@ export default function Search() {
 
           <div className="relative md:min-w-96 lg:min-w-96 xl:min-w-96 2xl:w-96 sm:max-w-48">
             <input
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
               type="search"
-              id="search-dropdown"
+              id="search"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-zinc-800 rounded-e-sm dark:focus:border-zinc-600 dark:focus:bg-zinc-800 dark:bg-zinc-800 dark:placeholder-zinc-400 dark:text-white"
               placeholder="Search"
               required

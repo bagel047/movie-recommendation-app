@@ -197,10 +197,12 @@ export default function Movie() {
               </div>
             </div>
 
-            <TrailerButton
-              trailerUrl={trailerUrl}
-              details={details}
-            ></TrailerButton>
+            <div className="mt-4">
+              <TrailerButton
+                trailerUrl={trailerUrl}
+                details={details}
+              ></TrailerButton>
+            </div>
           </div>
         </div>
       </div>
