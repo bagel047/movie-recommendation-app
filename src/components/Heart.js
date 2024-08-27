@@ -10,7 +10,7 @@ export default function HeartIcon() {
   };
 
   return (
-    <div onClick={handleClick} className="hover:cursor-pointer">
+    <button onClick={handleClick} className="hover:cursor-pointer">
       {isClicked ? (
         <HeartIconSolid
           title="Remove from Favorites"
@@ -22,6 +22,6 @@ export default function HeartIcon() {
           className="size-6 text-white hover:text-red-600"
         ></HeartIconOutline>
       )}
-    </div>
+    </button>
   );
 }

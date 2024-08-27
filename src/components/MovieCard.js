@@ -56,7 +56,7 @@ export default function MovieCard(props) {
 
   return (
     <>
-      {details ? (
+      {details != undefined ? (
         <div className="mr-1 w-56 h-fit bg-inherit inline-block snap-start hover:bg-zinc-800 hover:scale-[1.06] ease-in-out duration-150 p-2 rounded-md">
           <div className="relative w-full overflow-hidden">
             <img

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 
 export default function Result(props) {
   const media_type = props.data?.media_type;
-  const [name, setName] = useState(
-    media_type === "movie" ? props.data?.title : props.data?.name
-  );
+
+  const [name, setName] = useState(() => {
+    return props.data?.title || props.data?.name;
+  });
+
   const [info1, setInfo1] = useState(() => {
     if (media_type === "person") {
       return props.data?.known_for_department || "N/A";

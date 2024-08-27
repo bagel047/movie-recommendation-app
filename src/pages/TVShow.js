@@ -150,7 +150,7 @@ export default function TVShow() {
                           onClick={() => setIsExpanded(!isExpanded)}
                           className="inline-block text-white hover:underline hover:cursor-pointer pl-1"
                         >
-                          {isExpanded ? " read less" : " read more"}
+                          {isExpanded ? " show less" : " show more"}
                         </span>
                       )}
                     </span>

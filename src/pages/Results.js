@@ -29,17 +29,20 @@ export default function Results() {
       <div className="flex flex-col">
         {results && results.length > 0
           ? results.map((result) => {
+              const linkTo = result.media_type ? result.media_type : filter;
               return (
                 <Link
                   key={result.id}
-                  to={`/${result.media_type}/${result.id}`}
+                  to={`/${linkTo}/${result.id}`}
                   className="no-underline text-white"
                 >
                   <Result data={result} filter={filter} />
                 </Link>
               );
             })
-          : `No results found for: "${search}"`}
+          : `No results found for: "${search}"${
+              filter !== "multi" ? " Try removing filters." : ""
+            }`}
       </div>
     </>
   );

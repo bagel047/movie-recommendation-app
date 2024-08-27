@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,6 +9,8 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyAAMIFrhi8EWf-zz-cvPS6_YSZ8v9_04Nw",
   authDomain: "movierecommendation-30db0.firebaseapp.com",
+  databaseURL:
+    "https://movierecommendation-30db0-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "movierecommendation-30db0",
   storageBucket: "movierecommendation-30db0.appspot.com",
   messagingSenderId: "1098684483683",
@@ -18,4 +20,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+export { app, auth };

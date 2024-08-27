@@ -15,7 +15,7 @@ export default function Movie() {
   const [details, setDetails] = useState({});
   const [images, setImages] = useState({});
   const [videos, setVideos] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
+  const [trailerKey, setTrailerKey] = useState("");
   const [credits, setCredits] = useState({});
   const [reviews, setReviews] = useState([]);
 
@@ -46,7 +46,7 @@ export default function Movie() {
       })
       .catch((err) => console.error(err));
 
-    // trailer url
+    // trailer key
     let url = "";
     let hasTrailer = false;
     if (videos && videos.length > 0) {
@@ -61,7 +61,7 @@ export default function Movie() {
         }
       }
       if (!hasTrailer) url = videos[0].key;
-      setTrailerUrl(url);
+      setTrailerKey(url);
     }
 
     // runtime format in hours, minutes
@@ -158,7 +158,7 @@ export default function Movie() {
                           onClick={() => setIsExpanded(!isExpanded)}
                           className="inline-block text-white hover:underline hover:cursor-pointer pl-1"
                         >
-                          {isExpanded ? " read less" : " read more"}
+                          {isExpanded ? " show less" : " show more"}
                         </span>
                       )}
                     </span>
@@ -199,7 +199,7 @@ export default function Movie() {
 
             <div className="mt-4">
               <TrailerButton
-                trailerUrl={trailerUrl}
+                trailerKey={trailerKey}
                 details={details}
               ></TrailerButton>
             </div>

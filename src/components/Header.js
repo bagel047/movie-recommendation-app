@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
-import { LoginContext } from "../App";
+import { useAuth } from "../contexts/authContext";
+import { doSignOut } from "../firebase/auth";
 import {
   Disclosure,
   DisclosureButton,
@@ -8,7 +9,6 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import logo1 from "../assets/images/logo1.png";
-import SearchDropdown from "./SearchDropdown";
 import Search from "./Search";
 
 const navigation = [
@@ -21,7 +21,11 @@ function classNames(...classes) {
 }
 
 export default function Header(props) {
-  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+  const { userLoggedIn, currentUser } = useAuth();
+
+  useEffect(() => {
+    console.log(currentUser);
+  });
 
   return (
     <>
@@ -73,11 +77,12 @@ export default function Header(props) {
                     </NavLink>
                   ))}
 
-                  {loggedIn ? (
+                  {userLoggedIn ? (
                     <NavLink
                       to="/login"
                       onClick={() => {
-                        setLoggedIn(false);
+                        doSignOut();
+                        // setLoggedIn(false);
                         // localStorage.clear(); ne treba, setLoggedIn go referencira changeLoggedIn od ../App
                       }}
                       className={({ isActive }) => {
@@ -142,11 +147,12 @@ export default function Header(props) {
               </NavLink>
             ))}
 
-            {loggedIn ? (
+            {userLoggedIn ? (
               <NavLink
                 to="/login"
                 onClick={() => {
-                  setLoggedIn(false);
+                  doSignOut();
+                  // setLoggedIn(false);
                   // localStorage.clear();
                 }}
                 className={({ isActive }) => {

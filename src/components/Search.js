@@ -45,7 +45,7 @@ export default function Search() {
             />
             <button
               type="submit"
-              className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-zinc-950 rounded-e-md hover:bg-zinc-700 focus:outline-none focus:border-zinc-500 dark:bg-zinc-950 dark:hover:bg-zinc-700 "
+              className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-md hover:bg-zinc-700 focus:outline-none focus:border-zinc-500 dark:hover:bg-zinc-700 "
             >
               <svg
                 className="w-4 h-4"

@@ -66,7 +66,7 @@ export default function SeasonsDropdown(props) {
         {show ? (
           <div
             id="dropdown"
-            className="mt-1 absolute z-10 rounded-md shadow w-44 bg-zinc-700 bg-opacity-70 border-1 border-black"
+            className="mt-1 absolute z-10 rounded-md shadow w-44 max-h-48 overflow-y-scroll scrollbar bg-zinc-700 bg-opacity-70 border-1 border-black"
           >
             <ul
               className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"

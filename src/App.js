@@ -11,8 +11,7 @@ import Movie from "./pages/Movie";
 import TVShow from "./pages/TVShow";
 import Season from "./pages/Season";
 import Results from "./pages/Results";
-
-export const LoginContext = createContext();
+import { AuthProvider } from "./contexts/authContext";
 
 function App() {
   useEffect(() => {
@@ -65,17 +64,8 @@ function App() {
   }, [results]);
   */
 
-  const [loggedIn, setLoggedIn] = useState(localStorage.access ? true : false);
-
-  function changeLoggedIn(value) {
-    setLoggedIn(value);
-    if (value === false) {
-      localStorage.clear();
-    }
-  }
-
   return (
-    <LoginContext.Provider value={[loggedIn, changeLoggedIn]}>
+    <AuthProvider>
       <BrowserRouter>
         <Header>
           <Routes>
@@ -91,7 +81,7 @@ function App() {
           </Routes>
         </Header>
       </BrowserRouter>
-    </LoginContext.Provider>
+    </AuthProvider>
     /*
     <div>
       {results
