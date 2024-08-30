@@ -11,7 +11,7 @@ export default function Review(props) {
   const content = props.data.content;
 
   return (
-    <div className="w-full mb-3 p-3 border-b border-zinc-700">
+    <div className="w-full mb-2.5 p-3 border-b border-zinc-700">
       <div className="flex items-center mb-2">
         <img
           src={imageUrl}

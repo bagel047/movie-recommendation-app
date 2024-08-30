@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { options } from "../shared";
 import StarRating from "../components/StarRating";
-import BookmarkIcon from "../components/Bookmark";
+import Bookmark from "../components/Bookmark";
 import HeartIcon from "../components/Heart";
 import TrailerButton from "../components/TrailerButton";
 import PersonCard from "../components/PersonCard";
@@ -185,7 +185,7 @@ export default function TVShow() {
                 <HeartIcon></HeartIcon>
               </div>
               <div>
-                <BookmarkIcon></BookmarkIcon>
+                <Bookmark></Bookmark>
               </div>
             </div>
 

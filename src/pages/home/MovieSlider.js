@@ -9,12 +9,20 @@ export default function MovieSlider(props) {
   const [categoryFix, setCategoryFix] = useState(
     props.categoryFix ? props.categoryFix : null
   );
-  const [type, setType] = useState(props.type);
 
   const [results, setResults] = useState([]);
   const [fetchedDetails, setFetchedDetails] = useState(new Set());
   let [clicks, setClicks] = useState(0);
   let [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setResults([]);
+    setFetchedDetails(new Set());
+    setPage(1);
+    setClicks(0);
+    setCategory(props.category);
+    setCategoryFix(props.categoryFix);
+  }, [props.category]);
 
   // Fetch page of results
   useEffect(() => {
@@ -37,15 +45,6 @@ export default function MovieSlider(props) {
         setResults(temp);
       });
   }, [page, category]);
-
-  useEffect(() => {
-    setResults([]);
-    setFetchedDetails(new Set());
-    setPage(1);
-    setClicks(0);
-    setCategory(props.category);
-    setCategoryFix(props.categoryFix);
-  }, [props.category]);
 
   function updateFetchedDetails(newValue) {
     setFetchedDetails(newValue);
@@ -94,13 +93,14 @@ export default function MovieSlider(props) {
             >
               {results.map((movie) => {
                 return (
-                  <Link to={`/${props.type}/${movie.id}`} key={movie.id}>
-                    <MovieCard
-                      data={movie}
-                      type={props.type}
-                      setFetchedDetails={updateFetchedDetails}
-                    />
-                  </Link>
+                  // <Link to={`/${props.type}/${movie.id}`} key={movie.id}>
+                  <MovieCard
+                    key={movie.id}
+                    data={movie}
+                    type={props.type}
+                    setFetchedDetails={updateFetchedDetails}
+                  />
+                  // </Link>
                 );
               })}
             </div>

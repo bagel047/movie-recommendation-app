@@ -1,7 +1,18 @@
 import MovieSlider from "./MovieSlider";
 import background from "../../assets/images/background.jpg";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [secondFetch, setSecondFetch] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSecondFetch(true);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <div className="font-poppins">
       <div className="relative mb-16">
@@ -25,24 +36,32 @@ export default function Home() {
         <MovieSlider name="Popular TV Shows" category="popular" type="tv" />
       </div>
 
-      <div className="mb-12 bg-zinc-900 py-8 rounded-md">
-        <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
-          Top Rated
-        </h2>
+      {secondFetch && (
+        <>
+          <div className="mb-12 bg-zinc-900 py-8 rounded-md">
+            <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
+              Top Rated
+            </h2>
 
-        <h3 className="mt-3 font-semibold text-lg pl-10">Movies</h3>
-        <MovieSlider name="Top Rated" category="top_rated" type="movie" />
+            <h3 className="mt-3 font-semibold text-lg pl-10">Movies</h3>
+            <MovieSlider name="Top Rated" category="top_rated" type="movie" />
 
-        <h3 className="mt-3 font-semibold text-lg pl-10">TV Shows</h3>
-        <MovieSlider name="Top Rated" category="top_rated" type="tv" />
-      </div>
+            <h3 className="mt-3 font-semibold text-lg pl-10">TV Shows</h3>
+            <MovieSlider name="Top Rated" category="top_rated" type="tv" />
+          </div>
 
-      <div className="mb-20 bg-zinc-900 py-8 rounded-md">
-        <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
-          In theaters
-        </h2>
-        <MovieSlider name="In theaters" category="now_playing" type="movie" />
-      </div>
+          <div className="mb-20 bg-zinc-900 py-8 rounded-md">
+            <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
+              In theaters
+            </h2>
+            <MovieSlider
+              name="In theaters"
+              category="now_playing"
+              type="movie"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

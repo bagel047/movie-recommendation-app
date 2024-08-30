@@ -23,10 +23,6 @@ function classNames(...classes) {
 export default function Header(props) {
   const { userLoggedIn, currentUser } = useAuth();
 
-  useEffect(() => {
-    console.log(currentUser);
-  });
-
   return (
     <>
       <Disclosure as="nav" className="bg-zinc-900 font-poppins">
