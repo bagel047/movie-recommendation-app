@@ -15,13 +15,13 @@ export default function MovieCard(props) {
     fetch(
       `https://api.themoviedb.org/3/${
         props.type
-      }/${props.data.id.toString()}?language=en-US`,
+      }/${props.id.toString()}?language=en-US`,
       options
     )
       .then((response) => response.json())
       .then((data) => {
         setDetails(data);
-        props.setFetchedDetails((prev) => new Set(prev).add(props.data.id));
+        props.setFetchedDetails((prev) => new Set(prev).add(props.id));
       });
   }, []);
 
@@ -58,30 +58,28 @@ export default function MovieCard(props) {
   return (
     <>
       {details != undefined ? (
-        <div className="mr-1 w-56 h-fit bg-inherit inline-block sm:snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in-out duration-150 p-2 rounded-md">
-          <Link to={`/${props.type}/${props.data.id}`} className="no-underline">
-            <div className="pb-4">
+        <div className="w-56 h-fit bg-inherit inline-block sm:snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md">
+          <Link to={`/${props.type}/${props.id}`} className="no-underline">
+            <div className="pb-3">
               <div className="relative w-full overflow-hidden">
                 <img
                   id="moviePoster"
-                  className="rounded-tl-md rounded-tr-md aspect-video object-cover w-full h-full"
-                  src={
-                    "https://image.tmdb.org/t/p/w500" + props.data?.poster_path
-                  }
+                  className="aspect-video object-cover w-full h-full"
+                  src={"https://image.tmdb.org/t/p/w500" + details?.poster_path}
                   alt={name + " Poster"}
                 />
               </div>
               <h5
-                className="pt-3 text-md text-white dark:text-white font-semibold truncate w-full overflow-hidden"
+                className="mb-1 pt-3 text-lg text-white dark:text-white font-semibold truncate w-full overflow-hidden"
                 title={name}
               >
                 {name}
               </h5>
-              <span className="mr-2 text-gray-900 dark:text-slate-300 text-xs">
+              <span className="text-gray-900 dark:text-slate-300 text-xs">
                 {details?.genres[0] ? details.genres[0].name : null}
                 {details?.genres[1] ? ", " + details.genres[1].name : null}
               </span>
-              <div className="flex items-center mt-2.5">
+              <div className="flex items-center mt-2">
                 <StarRating rating={details?.vote_average || 0} />
 
                 <span
@@ -103,7 +101,7 @@ export default function MovieCard(props) {
           </Link>
 
           <div className="flex items-end justify-between">
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-xs">
               <span className="mr-2 text-gray-900 dark:text-slate-300">
                 ({releaseDate ? releaseDate.substring(0, 4) : "N/A"})
               </span>
@@ -113,7 +111,7 @@ export default function MovieCard(props) {
               </span>
             </div>
 
-            <Bookmark type={props.type} id={props.data.id}></Bookmark>
+            <Bookmark type={props.type} id={props.id}></Bookmark>
           </div>
         </div>
       ) : null}

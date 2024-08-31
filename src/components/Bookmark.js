@@ -32,30 +32,34 @@ export default function Bookmark(props) {
   }, [watchlistedMovies, watchlistedTV, id]);
 
   const handleClick = async () => {
-    const userId = auth.currentUser.uid;
-    console.log(userId);
+    try {
+      const userId = auth.currentUser.uid;
 
-    if (!isClicked) {
-      try {
-        props.type === "movie"
-          ? await addMovieToWatchlist(userId, props.id)
-          : await addTVShowToWatchlist(userId, props.id);
-        alert("Added to Watchlist");
-      } catch (error) {
-        console.error("Error adding to watchlist: ", error);
+      if (!isClicked) {
+        try {
+          props.type === "movie"
+            ? await addMovieToWatchlist(userId, props.id)
+            : await addTVShowToWatchlist(userId, props.id);
+          alert("Added to Watchlist");
+        } catch (error) {
+          console.error("Error adding to watchlist: ", error);
+        }
+      } else {
+        try {
+          props.type === "movie"
+            ? await removeMovieFromWatchlist(userId, props.id)
+            : await removeTVShowFromWatchlist(userId, props.id);
+          alert("Removed from Watchlist");
+        } catch (error) {
+          console.error("Error removing from watchlist: ", error);
+        }
       }
-    } else {
-      try {
-        props.type === "movie"
-          ? await removeMovieFromWatchlist(userId, props.id)
-          : await removeTVShowFromWatchlist(userId, props.id);
-        alert("Removed from Watchlist");
-      } catch (error) {
-        console.error("Error removing from watchlist: ", error);
-      }
+
+      setIsClicked(!isClicked);
+    } catch (error) {
+      alert("You're not logged in!");
+      console.log(error);
     }
-
-    setIsClicked(!isClicked);
   };
 
   return (

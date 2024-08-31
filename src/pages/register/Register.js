@@ -32,13 +32,13 @@ export default function Register() {
   };
 
   return (
-    <div className="w-fit mx-auto">
+    <div className="w-fit mx-auto mt-4">
       {userLoggedIn ? (
         <Navigate to={"/home"} replace={true} />
       ) : (
-        <div className="border-2 border-zinc-950 bg-zinc-700 p-6 rounded">
+        <div className="border-1 border-zinc-950 bg-zinc-700 p-6 rounded">
           <form onSubmit={onSubmit}>
-            <h3 className="font-bold text-lg">Register</h3>
+            <h3 className="text-lg font-semibold">Register</h3>
 
             <div className="flex justify-between items-center mt-6 mb-2 pb-2">
               <label htmlFor="email" className="mr-2 text-sm">

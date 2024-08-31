@@ -93,14 +93,12 @@ export default function MovieSlider(props) {
             >
               {results.map((movie) => {
                 return (
-                  // <Link to={`/${props.type}/${movie.id}`} key={movie.id}>
                   <MovieCard
                     key={movie.id}
-                    data={movie}
+                    id={movie.id}
                     type={props.type}
                     setFetchedDetails={updateFetchedDetails}
                   />
-                  // </Link>
                 );
               })}
             </div>
