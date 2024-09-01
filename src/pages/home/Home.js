@@ -25,7 +25,7 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="mb-12 bg-zinc-900 py-8 rounded-md">
+      <div className="mb-12 py-10 rounded-md bg-gradient-to-l from-zinc-950 to-zinc-900">
         <h2 className="font-bold text-2xl text-red-600 mb-6 pl-10">Popular</h2>
 
         <h3 className="mt-3 font-semibold text-lg pl-10">Movies</h3>
@@ -38,7 +38,7 @@ export default function Home() {
 
       {secondFetch && (
         <>
-          <div className="mb-12 bg-zinc-900 py-8 rounded-md">
+          <div className="mb-12 py-10 rounded-md bg-gradient-to-r from-zinc-950 to-zinc-900">
             <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
               Top Rated
             </h2>
@@ -50,7 +50,7 @@ export default function Home() {
             <MovieSlider name="Top Rated" category="top_rated" type="tv" />
           </div>
 
-          <div className="mb-20 bg-zinc-900 py-8 rounded-md">
+          <div className="mb-12 py-10 rounded-md bg-gradient-to-b from-zinc-950 to-zinc-900">
             <h2 className="mb-2 font-bold text-2xl text-red-600 mb-6 pl-10">
               In theaters
             </h2>

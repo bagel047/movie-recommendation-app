@@ -3,12 +3,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useWatchlist } from "../../contexts/watchlistContext/watchlistContext";
 import MovieCard from "../../components/MovieCard";
 import { auth } from "../../firebase/firebase";
+import List from "./List";
+import { useFavorites } from "../../contexts/favoritesContext/favoritesContext";
 
 export default function Library() {
   const { watchlistedMovies, watchlistedTV } = useWatchlist();
   const watchlistedMoviesArray = Object.keys(watchlistedMovies);
   const watchlistedTVArray = Object.keys(watchlistedTV);
-  const [fetchedDetails, setFetchedDetails] = useState(new Set());
+  const [showWatchlists, setShowWatchlists] = useState(true);
+
+  const { favoriteMovies, favoriteTV } = useFavorites();
+  const favoriteMoviesArray = Object.keys(favoriteMovies);
+  const favoriteTVArray = Object.keys(favoriteTV);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const userId = auth.currentUser?.uid;
   const navigate = useNavigate();
@@ -27,46 +34,110 @@ export default function Library() {
   useEffect(() => {
     console.log("watchlisted movies: ", watchlistedMoviesArray);
     console.log("watchlisted tv: ", watchlistedTVArray);
-    setFetchedDetails(new Set());
+
     console.log(userId);
   }, []);
 
-  function updateFetchedDetails(newValue) {
-    setFetchedDetails(newValue);
-  }
-
   return (
     <>
-      <div className="mb-12 mt-8">
-        <h1 className="text-xl px-2 py-1">Movies watchlist</h1>
-        <div className="flex flex-wrap">
-          {watchlistedMoviesArray?.map((movieId) => {
-            return (
-              <MovieCard
-                key={movieId}
-                id={movieId}
-                type={"movie"}
-                setFetchedDetails={updateFetchedDetails}
-              />
-            );
-          })}
+      <div className="mb-10 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 p-8 rounded-xl">
+        <h1 className="tracking-wider text-3xl font-semibold mt-3 mb-3">
+          Your library
+        </h1>
+        <div className="flex gap-1.5 text-sm">
+          <button
+            onClick={() => {
+              setShowWatchlists(true);
+              setShowFavorites(false);
+            }}
+            className={`${
+              showWatchlists
+                ? "bg-opacity-100 hover:bg-opacity-40"
+                : "bg-opacity-15"
+            } border-1 border-zinc-950 bg-zinc-950 hover:bg-opacity-100 rounded-full py-1.5 px-3`}
+          >
+            Watchlists
+          </button>
+          <button
+            onClick={() => {
+              setShowFavorites(true);
+              setShowWatchlists(false);
+            }}
+            className={`${
+              showFavorites
+                ? "bg-opacity-100 hover:bg-opacity-40"
+                : "bg-opacity-15"
+            } border-1 border-zinc-950 bg-zinc-950 hover:bg-opacity-100 rounded-full py-1.5 px-3`}
+          >
+            Favorites
+          </button>
         </div>
       </div>
 
       <div>
-        <h1 className="text-xl px-2 py-1">TV Series watchlist</h1>
-        <div>
-          {watchlistedTVArray?.map((tvId) => {
-            return (
-              <MovieCard
-                key={tvId}
-                id={tvId}
-                type={"tv"}
-                setFetchedDetails={updateFetchedDetails}
-              />
-            );
-          })}
-        </div>
+        {showWatchlists ? (
+          <div className="">
+            {watchlistedMoviesArray.length === 0 &&
+            watchlistedTVArray.length === 0 ? (
+              <div className="flex gap-4 justify-center items-center text-sm">
+                <p className="inline-block mb-0">
+                  Your watchlists are empty &nbsp; :(
+                </p>
+                <button
+                  onClick={() => navigate("/home")}
+                  className="inline-block border-1 border-zinc-950 bg-zinc-950 bg-opacity-15 hover:bg-opacity-100 rounded-full py-1.5 px-3"
+                >
+                  Discover
+                </button>
+              </div>
+            ) : (
+              <>
+                <List
+                  array={watchlistedMoviesArray}
+                  name={"Movies watchlist"}
+                  type={"movie"}
+                />
+                <List
+                  array={watchlistedTVArray}
+                  name={"TV series watchlist"}
+                  type={"tv"}
+                />
+              </>
+            )}
+          </div>
+        ) : null}
+
+        {showFavorites ? (
+          <div>
+            {favoriteMoviesArray.length === 0 &&
+            favoriteTVArray.length === 0 ? (
+              <div className="flex gap-4 justify-center items-center text-sm">
+                <p className="inline-block mb-0">
+                  Your favorites lists are empty &nbsp; :(
+                </p>
+                <button
+                  onClick={() => navigate("/home")}
+                  className="inline-block border-1 border-zinc-950 bg-zinc-950 bg-opacity-15 hover:bg-opacity-100 rounded-full py-1.5 px-3"
+                >
+                  Discover
+                </button>
+              </div>
+            ) : (
+              <>
+                <List
+                  array={favoriteMoviesArray}
+                  name={"Liked movies"}
+                  type={"movie"}
+                />
+                <List
+                  array={favoriteTVArray}
+                  name={"Liked TV series"}
+                  type={"tv"}
+                />
+              </>
+            )}
+          </div>
+        ) : null}
       </div>
     </>
   );

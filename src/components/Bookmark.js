@@ -67,12 +67,12 @@ export default function Bookmark(props) {
       {isClicked ? (
         <BookmarkIconSolid
           title="Remove from Watchlist"
-          className="size-6 text-white hover:text-slate-300"
+          className="size-6 text-white hover:opacity-70"
         ></BookmarkIconSolid>
       ) : (
         <BookmarkIconOutline
           title="Add to Watchlist"
-          className="size-6 text-white hover:text-slate-500"
+          className="size-6 hover:text-gray-400"
         ></BookmarkIconOutline>
       )}
     </button>

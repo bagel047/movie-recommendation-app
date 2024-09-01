@@ -58,7 +58,7 @@ export default function MovieCard(props) {
   return (
     <>
       {details != undefined ? (
-        <div className="w-56 h-fit bg-inherit inline-block sm:snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md">
+        <div className="lg:w-56 lg:h-fit bg-inherit inline-block snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md">
           <Link to={`/${props.type}/${props.id}`} className="no-underline">
             <div className="pb-3">
               <div className="relative w-full overflow-hidden">

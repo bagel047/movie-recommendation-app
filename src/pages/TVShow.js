@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { options } from "../shared";
 import StarRating from "../components/StarRating";
 import Bookmark from "../components/Bookmark";
-import HeartIcon from "../components/Heart";
+import Heart from "../components/Heart";
 import TrailerButton from "../components/TrailerButton";
 import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
@@ -182,10 +182,10 @@ export default function TVShow() {
 
             <div className="flex flex-col w-fit border-l-2 px-2 py-1 mt-4 border-red-800">
               <div className="mb-1.5">
-                <HeartIcon></HeartIcon>
+                <Heart type={"tv"} id={id}></Heart>
               </div>
               <div>
-                <Bookmark></Bookmark>
+                <Bookmark type={"tv"} id={id}></Bookmark>
               </div>
             </div>
 

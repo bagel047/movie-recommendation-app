@@ -13,6 +13,7 @@ import Season from "./pages/Season";
 import Results from "./pages/Results";
 import { AuthProvider } from "./contexts/authContext";
 import { WatchlistProvider } from "./contexts/watchlistContext/watchlistContext";
+import { FavoritesProvider } from "./contexts/favoritesContext/favoritesContext";
 
 function App() {
   useEffect(() => {
@@ -25,23 +26,25 @@ function App() {
 
   return (
     <AuthProvider>
-      <WatchlistProvider>
-        <BrowserRouter>
-          <Header>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/movie/:id" element={<Movie />} />
-              <Route path="/tv/:id" element={<TVShow />} />
-              <Route path="/tv/:tvID/season/:seasonID" element={<Season />} />
-              <Route path="/results/:filter/:search" element={<Results />} />
-              <Route path="/library" element={<Library></Library>} />
-              <Route path="/login" element={<Login></Login>} />
-              <Route path="/register" element={<Register></Register>} />
-            </Routes>
-          </Header>
-        </BrowserRouter>
-      </WatchlistProvider>
+      <FavoritesProvider>
+        <WatchlistProvider>
+          <BrowserRouter>
+            <Header>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/movie/:id" element={<Movie />} />
+                <Route path="/tv/:id" element={<TVShow />} />
+                <Route path="/tv/:tvID/season/:seasonID" element={<Season />} />
+                <Route path="/results/:filter/:search" element={<Results />} />
+                <Route path="/library" element={<Library></Library>} />
+                <Route path="/login" element={<Login></Login>} />
+                <Route path="/register" element={<Register></Register>} />
+              </Routes>
+            </Header>
+          </BrowserRouter>
+        </WatchlistProvider>
+      </FavoritesProvider>
     </AuthProvider>
   );
 }

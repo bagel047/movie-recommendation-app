@@ -89,7 +89,7 @@ export default function MovieSlider(props) {
               id={`slider-${categoryFix != null ? categoryFix : category}-${
                 props.type
               }`}
-              className="p-3 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory bg-gradient-to-b from-zinc-950 to-zinc-900"
+              className="p-3 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
             >
               {results.map((movie) => {
                 return (
