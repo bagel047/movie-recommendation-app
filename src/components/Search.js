@@ -26,7 +26,7 @@ export default function Search() {
         e.preventDefault();
         handleSubmit();
       }}
-      className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-8 lg:mr-4"
     >
       <form className="max-w-lg mx-auto">
         <div className="flex items-center">
@@ -39,13 +39,13 @@ export default function Search() {
               }}
               type="search"
               id="search"
-              className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-zinc-800 rounded-e-md dark:focus:border-zinc-600 dark:focus:bg-zinc-800 dark:bg-zinc-800 dark:placeholder-zinc-400 dark:text-white border-s-2 border-s-zinc-900"
+              className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-zinc-800 rounded-e-md dark:focus:border-zinc-600 dark:focus:bg-zinc-800 dark:bg-zinc-900 border-1 border-zinc-700 dark:placeholder-zinc-400 dark:text-white border-s-2 border-s-zinc-900"
               placeholder="Search"
               required
             />
             <button
               type="submit"
-              className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-md hover:bg-zinc-700 focus:outline-none focus:border-zinc-500 dark:hover:bg-zinc-700 "
+              className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-md hover:bg-zinc-700 focus:outline-none focus:border-zinc-500 dark:hover:bg-zinc-700"
             >
               <svg
                 className="w-4 h-4"

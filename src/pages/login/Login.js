@@ -1,22 +1,28 @@
 import { useEffect, useState } from "react";
 import { doSignInWithEmailAndPassword } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext";
-import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import GoogleSignIn from "../../components/GoogleSignIn";
+import { useMessage } from "../../contexts/messageContext/messageContext";
+import PopupMessage from "../../components/PopupMessage";
 
 export default function Login() {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    console.log(userLoggedIn);
-  });
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setSigningIn] = useState(false);
   const [error, setError] = useState("");
+
+  const { updateMessage } = useMessage();
+  useEffect(() => {
+    if (location?.state?.previousUrl === "/library") {
+      console.log(location.state.previousUrl);
+      updateMessage("Log in to use your library");
+    }
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +42,11 @@ export default function Login() {
   useEffect(() => {
     if (userLoggedIn) {
       navigate(
-        location?.state?.previousUrl ? location.state.previousUrl : "/home"
+        location?.state?.previousUrl
+          ? location.state.previousUrl
+          : sessionStorage?.previousUrl
+          ? sessionStorage.previousUrl
+          : "/home"
       );
     }
   }, [userLoggedIn]);
@@ -49,6 +59,7 @@ export default function Login() {
 
   return (
     <div className="w-fit mx-auto mt-4">
+      <PopupMessage />
       <>
         {error && (
           <div className="mb-2 bg-red-950 bg-opacity-30 mx-auto text-center p-2.5 rounded border-1 border-red-600 text-sm">

@@ -33,7 +33,7 @@ export default function SearchDropdown(props) {
           onClick={toggleShow}
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="max-w-28 min-w-28 flex-shrink-0 z-10 items-center py-2.5 px-3 text-sm font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-800 dark:hover:bg-zinc-600 dark:text-white dark:border-zinc-950"
+          className="max-w-28 min-w-28 flex-shrink-0 z-10 items-center py-2.5 px-3 text-sm font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-600 dark:text-white border-1 border-zinc-700"
           type="button"
         >
           {category}{" "}
@@ -57,7 +57,7 @@ export default function SearchDropdown(props) {
         {show ? (
           <div
             id="dropdown"
-            className="absolute z-10 divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-zinc-950"
+            className="absolute z-10 rounded-md shadow w-44 dark:bg-zinc-950"
           >
             <ul
               className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"

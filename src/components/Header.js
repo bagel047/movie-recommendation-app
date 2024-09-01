@@ -10,6 +10,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import logo1 from "../assets/images/logo1.png";
 import Search from "./Search";
+import ProfileIcon from "./ProfileIcon";
 
 const navigation = [
   { name: "HOME", href: "/home" },
@@ -25,7 +26,7 @@ export default function Header(props) {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-zinc-900 font-poppins">
+      <Disclosure as="nav" className="bg-zinc-950 font-poppins">
         <div className="mx-auto max-w-screen-2xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -62,10 +63,8 @@ export default function Header(props) {
                       to={item.href}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
-                          (isActive
-                            ? "bg-zinc-950 text-white"
-                            : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                          "rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                          (isActive ? "bg-zinc-600" : "hover:bg-zinc-600")
                         );
                       }}
                     >
@@ -83,10 +82,8 @@ export default function Header(props) {
                       }}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
-                          (isActive
-                            ? "bg-zinc-950 text-white"
-                            : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                          "rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                          (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                         );
                       }}
                     >
@@ -97,10 +94,8 @@ export default function Header(props) {
                       to="/login"
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm font-semibold tracking-wider no-underline " +
-                          (isActive
-                            ? "bg-zinc-950 text-white"
-                            : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                          "rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                          (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                         );
                       }}
                     >
@@ -120,6 +115,7 @@ export default function Header(props) {
               </button> */}
 
             <Search />
+            <ProfileIcon userLoggedIn={userLoggedIn} />
           </div>
         </div>
 
@@ -132,10 +128,8 @@ export default function Header(props) {
                 aria-current={item.current ? "page" : undefined}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
-                    (isActive
-                      ? "bg-zinc-950 text-white"
-                      : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                    (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                   );
                 }}
               >
@@ -153,10 +147,8 @@ export default function Header(props) {
                 }}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
-                    (isActive
-                      ? "bg-zinc-950 text-white"
-                      : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                    (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                   );
                 }}
               >
@@ -167,10 +159,8 @@ export default function Header(props) {
                 to="/login"
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-base font-semibold tracking-wider no-underline " +
-                    (isActive
-                      ? "bg-zinc-950 text-white"
-                      : "text-gray-300 hover:bg-zinc-600 hover:text-white")
+                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                    (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                   );
                 }}
               >

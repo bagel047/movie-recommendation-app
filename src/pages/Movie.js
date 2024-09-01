@@ -9,6 +9,7 @@ import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
 import MovieSlider from "./home/MovieSlider";
 import { parse, format } from "date-fns";
+import PopupMessage from "../components/PopupMessage";
 
 export default function Movie() {
   const { id } = useParams();
@@ -104,6 +105,7 @@ export default function Movie() {
 
   return (
     <>
+      <PopupMessage />
       <div className="w-full relative">
         <img
           src={backdropUrl}
@@ -189,7 +191,7 @@ export default function Movie() {
             </div>
 
             <div className="flex flex-col w-fit border-l-2 px-2 py-1 mt-4 border-red-800">
-              <div className="mb-1.5">
+              <div>
                 <Heart type={"movie"} id={id}></Heart>
               </div>
               <div>

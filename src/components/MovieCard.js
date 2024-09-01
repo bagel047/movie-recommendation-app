@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Bookmark from "./Bookmark";
+import Heart from "./Heart";
 import StarRating from "./StarRating";
 import { options } from "../shared";
 import { Link } from "react-router-dom";
@@ -58,7 +59,7 @@ export default function MovieCard(props) {
   return (
     <>
       {details != undefined ? (
-        <div className="lg:w-56 lg:h-fit bg-inherit inline-block snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md">
+        <div className="lg:w-56 lg:h-fit bg-inherit inline-block snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md mb-2">
           <Link to={`/${props.type}/${props.id}`} className="no-underline">
             <div className="pb-3">
               <div className="relative w-full overflow-hidden">
@@ -111,7 +112,10 @@ export default function MovieCard(props) {
               </span>
             </div>
 
-            <Bookmark type={props.type} id={props.id}></Bookmark>
+            <div className="flex gap-1">
+              <Heart type={props.type} id={props.id}></Heart>
+              <Bookmark type={props.type} id={props.id}></Bookmark>
+            </div>
           </div>
         </div>
       ) : null}

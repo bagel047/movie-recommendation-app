@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useWatchlist } from "../../contexts/watchlistContext/watchlistContext";
-import MovieCard from "../../components/MovieCard";
 import { auth } from "../../firebase/firebase";
 import List from "./List";
 import { useFavorites } from "../../contexts/favoritesContext/favoritesContext";
+import { useMessage } from "../../contexts/messageContext/messageContext";
+import PopupMessage from "../../components/PopupMessage";
 
 export default function Library() {
   const { watchlistedMovies, watchlistedTV } = useWatchlist();
@@ -40,7 +41,8 @@ export default function Library() {
 
   return (
     <>
-      <div className="mb-10 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 p-8 rounded-xl">
+      <PopupMessage />
+      <div className="mb-3 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 py-8 px-3 lg:p-8 rounded-xl">
         <h1 className="tracking-wider text-3xl font-semibold mt-3 mb-3">
           Your library
         </h1>

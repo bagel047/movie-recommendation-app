@@ -10,6 +10,7 @@ import Review from "../components/Review";
 import MovieSlider from "./home/MovieSlider";
 import { parse, format } from "date-fns";
 import SeasonsDropdown from "../components/SeasonsDropdown";
+import PopupMessage from "../components/PopupMessage";
 
 export default function TVShow() {
   const { id } = useParams();
@@ -97,6 +98,7 @@ export default function TVShow() {
 
   return (
     <>
+      <PopupMessage />
       <div className="w-full relative">
         <img
           src={backdropUrl}
@@ -181,7 +183,7 @@ export default function TVShow() {
             </div>
 
             <div className="flex flex-col w-fit border-l-2 px-2 py-1 mt-4 border-red-800">
-              <div className="mb-1.5">
+              <div>
                 <Heart type={"tv"} id={id}></Heart>
               </div>
               <div>

@@ -9,11 +9,13 @@ import {
 } from "../services/databaseService";
 import { auth } from "../firebase/firebase";
 import { useWatchlist } from "../contexts/watchlistContext/watchlistContext";
+import { useMessage } from "../contexts/messageContext/messageContext";
 
 export default function Bookmark(props) {
   const [isClicked, setIsClicked] = useState(false);
   const [id, setId] = useState(props.id);
   const { watchlistedMovies, watchlistedTV } = useWatchlist();
+  const { updateMessage } = useMessage();
 
   useEffect(() => {
     setId(props.id);
@@ -40,41 +42,52 @@ export default function Bookmark(props) {
           props.type === "movie"
             ? await addMovieToWatchlist(userId, props.id)
             : await addTVShowToWatchlist(userId, props.id);
-          alert("Added to Watchlist");
+          // alert("Added to Watchlist");
+          updateMessage("Added to watchlist");
         } catch (error) {
           console.error("Error adding to watchlist: ", error);
+          updateMessage("An error occured, try again");
         }
       } else {
         try {
           props.type === "movie"
             ? await removeMovieFromWatchlist(userId, props.id)
             : await removeTVShowFromWatchlist(userId, props.id);
-          alert("Removed from Watchlist");
+          // alert("Removed from Watchlist");
+          updateMessage("Removed from watchlist");
         } catch (error) {
           console.error("Error removing from watchlist: ", error);
+          updateMessage("An error occured, try again");
         }
       }
 
       setIsClicked(!isClicked);
     } catch (error) {
-      alert("You're not logged in!");
+      updateMessage("You need to log in to add to your watchlist");
+      sessionStorage.setItem("previousUrl", window.location.pathname); // remember url before login
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    console.log(props.size, typeof props.size);
+  }, []);
+
   return (
-    <button onClick={handleClick} className="hover:cursor-pointer z-50">
-      {isClicked ? (
-        <BookmarkIconSolid
-          title="Remove from Watchlist"
-          className="size-6 text-white hover:opacity-70"
-        ></BookmarkIconSolid>
-      ) : (
-        <BookmarkIconOutline
-          title="Add to Watchlist"
-          className="size-6 hover:text-gray-400"
-        ></BookmarkIconOutline>
-      )}
-    </button>
+    <>
+      <button onClick={handleClick} className="hover:cursor-pointer z-50">
+        {isClicked ? (
+          <BookmarkIconSolid
+            title="Remove from Watchlist"
+            className={`size-5 text-white hover:opacity-70`}
+          ></BookmarkIconSolid>
+        ) : (
+          <BookmarkIconOutline
+            title="Add to Watchlist"
+            className={`size-5 hover:text-gray-400`}
+          ></BookmarkIconOutline>
+        )}
+      </button>
+    </>
   );
 }
