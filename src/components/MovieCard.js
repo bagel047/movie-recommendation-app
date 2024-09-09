@@ -4,6 +4,7 @@ import Heart from "./Heart";
 import StarRating from "./StarRating";
 import { options } from "../shared";
 import { Link } from "react-router-dom";
+import movie_placeholder from "../assets/images/movie-placeholder.png";
 
 export default function MovieCard(props) {
   const [details, setDetails] = useState();
@@ -66,7 +67,11 @@ export default function MovieCard(props) {
                 <img
                   id="moviePoster"
                   className="aspect-video object-cover w-full h-full"
-                  src={"https://image.tmdb.org/t/p/w500" + details?.poster_path}
+                  src={
+                    details?.backdrop_path
+                      ? `https://image.tmdb.org/t/p/w500${details.backdrop_path}`
+                      : movie_placeholder
+                  }
                   alt={name + " Poster"}
                 />
               </div>
@@ -77,6 +82,7 @@ export default function MovieCard(props) {
                 {name}
               </h5>
               <span className="text-gray-900 dark:text-slate-300 text-xs">
+                {details?.genres.length === 0 ? "N/A" : ""}
                 {details?.genres[0] ? details.genres[0].name : null}
                 {details?.genres[1] ? ", " + details.genres[1].name : null}
               </span>

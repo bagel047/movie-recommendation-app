@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { options } from "../../shared";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import MovieCard from "../../components/MovieCard";
+import movie_placeholder from "../../assets/images/movie-placeholder.png";
 
 export default function MovieSlider(props) {
   const [category, setCategory] = useState(props.category);
@@ -24,7 +24,7 @@ export default function MovieSlider(props) {
     setCategoryFix(props.categoryFix);
   }, [props.category]);
 
-  // Fetch page of results
+  // fetch page of results
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/${props.type}/${
@@ -34,11 +34,19 @@ export default function MovieSlider(props) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, props.category);
         let temp = [...results];
         data.results.forEach((result) => {
           if (!fetchedDetails.has(result.id)) {
-            temp.push(result);
+            if (props.name !== "Recommendations-Library") {
+              temp.push(result);
+            } else {
+              if (
+                !(result.id in props.favoriteMovies) &&
+                !(result.id in props.watchlistedMovies)
+              ) {
+                temp.push(result);
+              }
+            }
           }
         });
         // console.log(temp);
@@ -77,9 +85,7 @@ export default function MovieSlider(props) {
   return (
     <>
       {results ? (
-        <div className="">
-          {/* <h2 className="mb-3 font-semibold text-lg">{props.name}</h2> */}
-
+        <div>
           <div className="flex justify-between">
             <ChevronLeftIcon
               onClick={slideLeft}
@@ -89,18 +95,40 @@ export default function MovieSlider(props) {
               id={`slider-${categoryFix != null ? categoryFix : category}-${
                 props.type
               }`}
-              className="p-3 w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
+              className="w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory"
             >
-              {results.map((movie) => {
-                return (
+              {results.length > 0 ? (
+                results.map((movie) => (
                   <MovieCard
                     key={movie.id}
                     id={movie.id}
                     type={props.type}
                     setFetchedDetails={updateFetchedDetails}
                   />
-                );
-              })}
+                ))
+              ) : (
+                <div className="flex gap-2">
+                  {[...Array(6)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="w-56 h-60 bg-zinc-800 rounded-md animate-pulse"
+                    >
+                      <div className="pb-3">
+                        <div className="relative w-full">
+                          <img
+                            className="aspect-video object-cover w-full h-full"
+                            src={movie_placeholder}
+                          />
+                        </div>
+                        <div className="px-2">
+                          <h5 className="mt-2.5 mb-2 h-3 w-36 bg-zinc-600"></h5>
+                          <p className="h-3 w-full bg-zinc-700"></p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <ChevronRightIcon
               id="right"

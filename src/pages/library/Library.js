@@ -4,8 +4,8 @@ import { useWatchlist } from "../../contexts/watchlistContext/watchlistContext";
 import { auth } from "../../firebase/firebase";
 import List from "./List";
 import { useFavorites } from "../../contexts/favoritesContext/favoritesContext";
-import { useMessage } from "../../contexts/messageContext/messageContext";
 import PopupMessage from "../../components/PopupMessage";
+import Recommendations from "../../components/Recommendations";
 
 export default function Library() {
   const { watchlistedMovies, watchlistedTV } = useWatchlist();
@@ -42,7 +42,7 @@ export default function Library() {
   return (
     <>
       <PopupMessage />
-      <div className="mb-3 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 py-8 px-3 lg:p-8 rounded-xl">
+      <div className="mb-3 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 py-8 px-3 lg:p-8 rounded-t-xl">
         <h1 className="tracking-wider text-3xl font-semibold mt-3 mb-3">
           Your library
         </h1>
@@ -141,6 +141,15 @@ export default function Library() {
           </div>
         ) : null}
       </div>
+
+      {userId ? (
+        <div className="mt-4 py-8 px-1 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+          <h2 className="text-lg mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
+            You might like:
+          </h2>
+          <Recommendations type="movie" />
+        </div>
+      ) : null}
     </>
   );
 }

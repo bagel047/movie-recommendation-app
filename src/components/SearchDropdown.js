@@ -33,10 +33,9 @@ export default function SearchDropdown(props) {
           onClick={toggleShow}
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="max-w-28 min-w-28 flex-shrink-0 z-10 items-center py-2.5 px-3 text-sm font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-600 dark:text-white border-1 border-zinc-700"
+          className="max-w-28 min-w-28 flex-shrink-0 z-10 inline-flex justify-center items-center gap-1 py-2.5 px-3 text-sm font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-600 dark:text-white border-1 border-zinc-700"
           type="button"
         >
-          {category}{" "}
           <svg
             className="w-2.5 h-2.5 inline-block"
             aria-hidden="true"
@@ -52,18 +51,19 @@ export default function SearchDropdown(props) {
               d="m1 1 4 4 4-4"
             />
           </svg>
+          {category}{" "}
         </button>
 
         {show ? (
           <div
             id="dropdown"
-            className="absolute z-10 rounded-md shadow w-44 dark:bg-zinc-950"
+            className="absolute z-10 rounded-b-md shadow w-44 dark:bg-zinc-950 dark:bg-opacity-90 py-2.5"
           >
             <ul
               className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDefaultButton"
             >
-              <div className="divide divide-y divide-zinc-700 p-2">
+              <div className="divide divide-y divide-zinc-600">
                 <div>
                   <li>
                     <a
@@ -73,7 +73,7 @@ export default function SearchDropdown(props) {
                         toggleShow();
                       }}
                       href="#"
-                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
+                      className="block px-6 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       All
                     </a>
@@ -88,7 +88,7 @@ export default function SearchDropdown(props) {
                         toggleShow();
                       }}
                       href="#"
-                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
+                      className="block px-6 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       Movies
                     </a>
@@ -101,7 +101,7 @@ export default function SearchDropdown(props) {
                         toggleShow();
                       }}
                       href="#"
-                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
+                      className="block px-6 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       TV
                     </a>
@@ -114,7 +114,7 @@ export default function SearchDropdown(props) {
                         toggleShow();
                       }}
                       href="#"
-                      className="rounded-sm block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
+                      className="block px-6 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white text-white no-underline"
                     >
                       People
                     </a>

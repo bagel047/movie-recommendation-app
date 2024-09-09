@@ -42,12 +42,13 @@ export default function SeasonsDropdown(props) {
           onClick={toggleShow}
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="text-center text-sm bg-red-800 hover:bg-red-900 px-6 py-3 inline-block rounded-3xl"
+          className="text-center text-sm bg-red-800 hover:bg-red-900 px-3 py-2.5 inline-block inline-flex items-center gap-1 rounded-3xl"
           type="button"
         >
-          Seasons{" "}
           <svg
-            className="w-2.5 h-2.5 ms-3 inline-block"
+            width={10}
+            height={10}
+            className="inline-block"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,12 +62,13 @@ export default function SeasonsDropdown(props) {
               d="m1 1 4 4 4-4"
             />
           </svg>
+          Seasons{" "}
         </button>
 
         {show ? (
           <div
             id="dropdown"
-            className="mt-1 absolute z-10 rounded-md shadow w-44 max-h-48 overflow-y-scroll scrollbar bg-zinc-700 bg-opacity-70 border-1 border-black"
+            className="mt-1 absolute z-10 rounded-md shadow w-44 max-h-28 overflow-y-scroll scrollbar bg-zinc-950 bg-opacity-90 border-1 border-black"
           >
             <ul
               className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"
@@ -81,7 +83,7 @@ export default function SeasonsDropdown(props) {
                           key={index + 1}
                           className="no-underline"
                         >
-                          <li className="rounded-md block px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-950 dark:hover:text-white text-white">
+                          <li className="block px-6 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-600 text-white">
                             Season {index + 1}
                           </li>
                         </Link>

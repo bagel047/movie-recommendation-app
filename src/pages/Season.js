@@ -5,6 +5,7 @@ import StarRating from "../components/StarRating";
 import TrailerButton from "../components/TrailerButton";
 import { parse, format } from "date-fns";
 import Episode from "../components/Episode";
+import movie_placeholder from "../assets/images/movie-placeholder.png";
 
 export default function Season() {
   const { tvID, seasonID } = useParams();
@@ -66,7 +67,7 @@ export default function Season() {
 
   const posterUrl = seasonDetails?.poster_path
     ? `https://image.tmdb.org/t/p/w500${seasonDetails.poster_path}`
-    : "";
+    : movie_placeholder;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const overviewLimit = 280;

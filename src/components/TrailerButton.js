@@ -17,8 +17,8 @@ export default function TrailerButton(props) {
         className="text-center text-sm bg-red-800 hover:bg-red-900 rounded-3xl px-3 py-2.5 inline-flex items-center gap-1"
       >
         <PlayIcon
-          width={20}
-          height={20}
+          width={14}
+          height={14}
           color="white"
           className="inline-block"
         />

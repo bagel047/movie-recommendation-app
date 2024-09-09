@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import profile_placeholder from "../assets/images/profile-placeholder.png";
+import movie_placeholder from "../assets/images/movie-placeholder.png";
 
 export default function Result(props) {
   const media_type = props.data?.media_type;
@@ -29,20 +31,27 @@ export default function Result(props) {
     return props.filter === "multi" ? media_type : props.filter;
   });
 
-  const img = props.data?.poster_path
-    ? `https://image.tmdb.org/t/p/w500${props.data.poster_path}`
-    : props.data?.profile_path
-    ? `https://image.tmdb.org/t/p/w500${props.data.profile_path}`
-    : `https://static.vecteezy.com/system/resources/thumbnails/020/911/746/small/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png`;
+  const [img, setImg] = useState("");
+  useEffect(() => {
+    let type = props.filter === "multi" ? media_type : props.filter;
+    if (type === "person") {
+      props.data.profile_path !== null
+        ? setImg(`https://image.tmdb.org/t/p/w500/${props.data.profile_path}`)
+        : setImg(profile_placeholder);
+    } else {
+      props.data.poster_path !== null
+        ? setImg(`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`)
+        : setImg(movie_placeholder);
+    }
+  }, [props.data]);
 
   return (
     <div className="flex gap-2.5 hover:bg-zinc-700 p-2 rounded-lg">
       <img
         src={img}
         alt={`${name} Image`}
-        width="80"
-        height="150"
         className="object-cover rounded-lg"
+        style={{ width: "90px", height: "130px" }}
       ></img>
       <div>
         <h2 className="text-base font-bold">{name}</h2>

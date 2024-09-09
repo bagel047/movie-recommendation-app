@@ -38,7 +38,7 @@ export default function ProfileIcon(props) {
         {show ? (
           <div
             id="dropdown"
-            className="absolute z-10 shadow dark:bg-zinc-950 right-0 top-10 w-44 p-2 rounded-md text-sm text-right"
+            className="absolute z-10 shadow dark:bg-zinc-950 right-0 top-10 w-44 p-2 rounded-b-md text-sm text-right"
           >
             <ul className="divide-y divide-zinc-700 pl-0 mb-0">
               <li className="py-2.5">

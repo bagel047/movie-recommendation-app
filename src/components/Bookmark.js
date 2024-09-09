@@ -69,10 +69,6 @@ export default function Bookmark(props) {
     }
   };
 
-  useEffect(() => {
-    console.log(props.size, typeof props.size);
-  }, []);
-
   return (
     <>
       <button onClick={handleClick} className="hover:cursor-pointer z-50">
