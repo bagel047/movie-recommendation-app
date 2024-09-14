@@ -42,7 +42,7 @@ export default function SeasonsDropdown(props) {
           onClick={toggleShow}
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="text-center text-sm bg-red-800 hover:bg-red-900 px-3 py-2.5 inline-block inline-flex items-center gap-1 rounded-3xl"
+          className="text-center text-sm bg-red-800 hover:bg-red-900 px-3 py-2.5 inline-block inline-flex items-center gap-1 rounded-xl"
           type="button"
         >
           <svg

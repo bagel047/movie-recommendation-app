@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { options } from "../shared";
 import StarRating from "../components/StarRating";
 import Bookmark from "../components/Bookmark";
@@ -7,7 +7,7 @@ import Heart from "../components/Heart";
 import TrailerButton from "../components/TrailerButton";
 import PersonCard from "../components/PersonCard";
 import Review from "../components/Review";
-import MovieSlider from "./home/MovieSlider";
+import MovieSlider from "../components/MovieSlider";
 import { parse, format } from "date-fns";
 import SeasonsDropdown from "../components/SeasonsDropdown";
 import PopupMessage from "../components/PopupMessage";
@@ -25,6 +25,8 @@ export default function TVShow() {
   const [seasons, setSeasons] = useState([]);
   const [firstAirDate, setFirstAirDate] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -35,7 +37,12 @@ export default function TVShow() {
       `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos%2Creviews%2Crecommendations%2Ccredits&language=en-US`,
       options
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 404) {
+          navigate("/404");
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log(data);
         setDetails(data);
@@ -48,13 +55,6 @@ export default function TVShow() {
   }, [id]);
 
   useEffect(() => {
-    //   fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       setImages(data);
-    //     })
-    //     .catch((err) => console.error(err));
-
     // trailer key
     let key = "";
     let hasTrailer = false;
@@ -82,7 +82,11 @@ export default function TVShow() {
 
   const backdropUrl = details?.backdrop_path
     ? `https://image.tmdb.org/t/p/original${details.backdrop_path}`
-    : "";
+    : movie_placeholder;
+
+  const posterUrl = details?.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${details.poster_path}`
+    : movie_placeholder;
 
   function getRatingColor(rating) {
     if (rating >= 8) {
@@ -115,9 +119,7 @@ export default function TVShow() {
         <div className="absolute top-0 left-0 w-full h-[720px] flex flex-wrap justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent md:px-48 lg:px-48 sm:px-4">
           <div className="md:w-1/3 lg:w-1/3 p-2">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${
-                details.poster_path ? details.poster_path : movie_placeholder
-              }`}
+              src={posterUrl}
               alt={`${details.name} Poster`}
               className="w-full md:h-auto"
             ></img>
@@ -191,7 +193,7 @@ export default function TVShow() {
               </div>
             </div>
 
-            <div className="flex flex-col w-fit border-l-2 px-2 py-1 mt-4 border-red-800">
+            <div className="flex flex-col w-fit border-l-2 px-1 mt-4 border-red-800">
               <div>
                 <Heart type={"tv"} id={id}></Heart>
               </div>
@@ -217,7 +219,7 @@ export default function TVShow() {
         <div className="lg:w-3/4 w-full max-h-[22rem] bg-gradient-to-r from-zinc-950 to-zinc-900 px-6 py-8 rounded-md relative">
           <h2 className="text-lg mb-3 pl-3 tracking-wide">Cast</h2>
           {credits.cast && credits.cast.length > 0 ? (
-            <div className="flex overflow-x-scroll scrollbar scroll-smooth whitespace-nowrap pb-3">
+            <div className="flex overflow-x-scroll scrollbar scroll-smooth whitespace-nowrap py-3">
               {credits.cast.map((actor) => {
                 return <PersonCard key={actor.id} data={actor} />;
               })}

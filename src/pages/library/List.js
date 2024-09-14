@@ -22,7 +22,7 @@ export default function List(props) {
       <div className={`${collapse ? "mb-0" : "mb-8"}`}>
         <button
           onClick={handleClick}
-          className="mb-1 w-fit text-sm px-3 py-2 bg-zinc-950 bg-opacity-60 hover:bg-opacity-100 rounded-full tracking-wide"
+          className="mb-1 w-fit text-sm px-3 py-2 bg-zinc-950 bg-opacity-60 hover:bg-opacity-100 rounded-xl tracking-wide"
         >
           <svg
             className="w-2.5 h-2.5 inline-block mr-2.5"

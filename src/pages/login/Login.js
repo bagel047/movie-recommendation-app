@@ -100,7 +100,7 @@ export default function Login() {
               ></input>
             </div>
             <div className="border-t border-zinc-800">
-              <button className="mt-4 mb-2 text-white bg-[#050708] hover:bg-[#050708]/70 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 rounded-lg text-sm w-full py-2.5 px-4 text-center items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/70 me-2 mb-2 font-bold">
+              <button className="mt-4 mb-2 text-white bg-[#050708] hover:bg-[#050708]/70 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 rounded-lg text-xs w-full py-2.5 px-4 text-center items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/70 me-2 mb-2 font-semibold">
                 Login
               </button>
             </div>

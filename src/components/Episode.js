@@ -20,7 +20,7 @@ export default function Episode(props) {
           Episode {data?.episode_number}
         </h4>
         <span className="text-xs text-zinc-400 inline-block">
-          &middot; {data?.runtime}m
+          {data?.runtime ? <>&middot; {data.runtime}m</> : null}
         </span>
         <h3 className="text-lg">{data?.name}</h3>
         <p className="mt-2.5 text-sm text-zinc-200">{data?.overview}</p>

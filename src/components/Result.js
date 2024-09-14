@@ -10,7 +10,8 @@ export default function Result(props) {
   });
 
   const [info1, setInfo1] = useState(() => {
-    if (media_type === "person") {
+    let type = props.filter === "multi" ? media_type : props.filter;
+    if (type === "person") {
       return props.data?.known_for_department || "N/A";
     } else {
       return props.data?.release_date || props.data?.first_air_date
@@ -46,20 +47,20 @@ export default function Result(props) {
   }, [props.data]);
 
   return (
-    <div className="flex gap-2.5 hover:bg-zinc-700 p-2 rounded-lg">
+    <div className="flex gap-2.5 hover:bg-zinc-700 p-1 rounded-lg">
       <img
         src={img}
         alt={`${name} Image`}
         className="object-cover rounded-lg"
         style={{ width: "90px", height: "130px" }}
       ></img>
-      <div>
-        <h2 className="text-base font-bold">{name}</h2>
-        <span className="inline-block text-sm text-zinc-300 pr-2">
+      <div className="mt-1">
+        <h2 className="text-base mb-1">{name}</h2>
+        <span className="inline-block text-sm text-zinc-400 pr-2">
           &middot; {info1 ? info1 : "N/A"}
           {", "}
         </span>
-        <span className="inline-block capitalize text-sm text-zinc-300">
+        <span className="inline-block capitalize text-sm text-zinc-400">
           {info2}
         </span>
       </div>

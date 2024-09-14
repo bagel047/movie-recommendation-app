@@ -60,7 +60,7 @@ export default function MovieCard(props) {
   return (
     <>
       {details != undefined ? (
-        <div className="lg:w-56 lg:h-fit bg-inherit inline-block snap-center lg:snap-start hover:bg-zinc-800 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md mb-2">
+        <div className="w-full h-fit lg:w-56 lg:h-fit bg-inherit inline-block snap-center lg:snap-start hover:bg-zinc-700 hover:scale-[1.03] ease-in duration-150 py-2 px-1 rounded-md mb-2">
           <Link to={`/${props.type}/${props.id}`} className="no-underline">
             <div className="pb-3">
               <div className="relative w-full overflow-hidden">
@@ -76,7 +76,7 @@ export default function MovieCard(props) {
                 />
               </div>
               <h5
-                className="mb-1 pt-3 text-lg text-white dark:text-white font-semibold truncate w-full overflow-hidden"
+                className="mb-1 pt-3 text-base text-white dark:text-white font-semibold truncate w-full overflow-hidden"
                 title={name}
               >
                 {name}
@@ -91,7 +91,7 @@ export default function MovieCard(props) {
 
                 <span
                   title="Rating"
-                  className={`text-xs font-semibold px-2.5 py-0.5 rounded ms-3 ${
+                  className={`text-xs px-2.5 py-0.5 rounded ms-3 ${
                     isNaN(Math.round(details?.vote_average * 10) / 10)
                       ? "bg-gray-200 text-gray-800 dark:bg-gray-300 dark:text-gray-800"
                       : getRatingColor(

@@ -13,8 +13,8 @@ import Search from "./Search";
 import ProfileIcon from "./ProfileIcon";
 
 const navigation = [
-  { name: "HOME", href: "/home" },
-  { name: "LIBRARY", href: "/library" },
+  { name: "Home", href: "/home" },
+  { name: "Library", href: "/library" },
 ];
 
 function classNames(...classes) {
@@ -26,9 +26,12 @@ export default function Header(props) {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-zinc-950 font-poppins">
+      <Disclosure
+        as="nav"
+        className="bg-zinc-950 bg-opacity-95 font-poppins fixed w-full z-50"
+      >
         <div className="mx-auto max-w-screen-2xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-[4.5rem] items-center justify-end lg:justify-center">
+          <div className="relative flex h-[4.5rem] items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
               <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-zinc-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -44,7 +47,7 @@ export default function Header(props) {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex items-center flex-1">
+            <div className="flex items-center gap-3">
               {" "}
               {/* sm:items-stretch sm:justify-start */}
               {/* Logo Div */}
@@ -52,14 +55,14 @@ export default function Header(props) {
                 <img src={logo1} className="w-[30px] h-[30px]"></img>
               </div> */}
               <div className="hidden ml-6 lg:ml-0 sm:block">
-                <div className="flex space-x-4">
+                <div className="flex gap-1 items-center">
                   {navigation.map((item) => (
                     <NavLink
                       key={item.name}
                       to={item.href}
                       className={({ isActive }) => {
                         return (
-                          "rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                          "rounded-xl px-3 py-1.5 text-xs tracking-wider no-underline text-white " +
                           (isActive ? "bg-zinc-600" : "hover:bg-zinc-600")
                         );
                       }}
@@ -71,9 +74,13 @@ export default function Header(props) {
               </div>
             </div>
 
-            <div className="flex justify-end items-center flex-1">
-              <Search />
-              <ProfileIcon userLoggedIn={userLoggedIn} />
+            <div className="flex items-center sm:w-2/12 lg:w-4/12 gap-3">
+              <div className="sm:w-full lg:w-full">
+                <Search />
+              </div>
+              <div className="">
+                <ProfileIcon />
+              </div>
             </div>
           </div>
         </div>
@@ -87,8 +94,8 @@ export default function Header(props) {
                 aria-current={item.current ? "page" : undefined}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
-                    (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
+                    "block rounded-xl px-3 py-1.5 text-xs tracking-wider no-underline text-white " +
+                    (isActive ? "bg-zinc-600" : "hover:bg-zinc-600")
                   );
                 }}
               >
@@ -106,31 +113,31 @@ export default function Header(props) {
                 }}
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                    "block rounded-xl px-3 py-1.5 text-xs tracking-wider no-underline text-white " +
                     (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                   );
                 }}
               >
-                LOGOUT
+                Logout
               </NavLink>
             ) : (
               <NavLink
                 to="/login"
                 className={({ isActive }) => {
                   return (
-                    "block rounded-md px-3 py-2 text-sm tracking-wider no-underline text-white font-medium " +
+                    "block rounded-xl px-3 py-1.5 text-xs tracking-wider no-underline text-white " +
                     (isActive ? "bg-zinc-950" : "hover:bg-zinc-600")
                   );
                 }}
               >
-                LOGIN
+                Login
               </NavLink>
             )}
           </div>
         </DisclosurePanel>
       </Disclosure>
       <div className="bg-zinc-800 text-white">
-        <div className="max-w-screen-2xl mx-auto min-h-screen px-3 py-2">
+        <div className="max-w-screen-2xl mx-auto min-h-screen px-3 pt-[5rem] pb-2">
           {props.children}
         </div>
       </div>

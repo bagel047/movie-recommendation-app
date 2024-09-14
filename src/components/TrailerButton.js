@@ -14,7 +14,7 @@ export default function TrailerButton(props) {
     <>
       <button
         onClick={toggleShow}
-        className="text-center text-sm bg-red-800 hover:bg-red-900 rounded-3xl px-3 py-2.5 inline-flex items-center gap-1"
+        className="text-center text-sm bg-red-800 hover:bg-red-900 rounded-xl px-3 py-2.5 inline-flex items-center gap-1"
       >
         <PlayIcon
           width={14}

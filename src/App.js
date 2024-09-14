@@ -15,6 +15,7 @@ import { AuthProvider } from "./contexts/authContext";
 import { WatchlistProvider } from "./contexts/watchlistContext/watchlistContext";
 import { FavoritesProvider } from "./contexts/favoritesContext/favoritesContext";
 import { MessageProvider } from "./contexts/messageContext/messageContext";
+import NotFound from "./components/NotFound";
 
 function App() {
   useEffect(() => {
@@ -45,9 +46,11 @@ function App() {
                     path="/results/:filter/:search"
                     element={<Results />}
                   />
-                  <Route path="/library" element={<Library></Library>} />
-                  <Route path="/login" element={<Login></Login>} />
-                  <Route path="/register" element={<Register></Register>} />
+                  <Route path="/library" element={<Library />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/404" element={<NotFound />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Header>
             </BrowserRouter>

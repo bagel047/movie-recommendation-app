@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { options } from "../shared";
 import StarRating from "../components/StarRating";
 import TrailerButton from "../components/TrailerButton";
@@ -107,8 +107,10 @@ export default function Season() {
           </div>
 
           <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
-            <h1 className="font-bold text-6xl">{tvShow}</h1>
-            <h2 className="font-bold text-5xl text-red-800">
+            <Link to={`/tv/${tvID}`} className="no-underline text-white">
+              <h1 className="font-bold text-6xl">{tvShow}</h1>
+            </Link>
+            <h2 className="font-bold text-3xl text-red-800">
               Season {seasonID}
             </h2>
             <span className="text-sm text-zinc-300 inline-block pr-2">

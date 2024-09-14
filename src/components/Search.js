@@ -26,20 +26,20 @@ export default function Search() {
         e.preventDefault();
         handleSubmit();
       }}
-      className="absolute inset-y-0 right-0 flex items-center mr-11"
+      className="relative inset-y-0 flex items-center w-full"
     >
-      <form className="max-w-lg mx-auto">
+      <form className="w-full">
         <div className="flex items-center">
           <SearchDropdown updateSearchFilter={updateSearchFilter} />
 
-          <div className="relative max-w-48 lg:min-w-96">
+          <div className="relative w-full">
             <input
               onChange={(e) => {
                 setInput(e.target.value);
               }}
               type="search"
               id="search"
-              className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-zinc-800 rounded-e-md dark:focus:border-zinc-600 dark:focus:bg-zinc-800 dark:bg-zinc-900 border-1 border-zinc-700 border-s-zinc-900 dark:placeholder-zinc-400 dark:text-zinc-200"
+              className="block p-2.5 w-full z-20 text-xs text-gray-900 bg-zinc-800 rounded-e-md dark:focus:border-zinc-600 dark:focus:bg-zinc-800 dark:bg-zinc-900 border-1 border-zinc-800 border-s-zinc-900 dark:placeholder-zinc-400 dark:text-zinc-200"
               placeholder="Search"
               required
             />

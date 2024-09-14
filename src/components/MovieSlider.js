@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { options } from "../../shared";
+import { options } from "../shared";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import MovieCard from "../../components/MovieCard";
-import movie_placeholder from "../../assets/images/movie-placeholder.png";
+import MovieCard from "./MovieCard";
+import movie_placeholder from "../assets/images/movie-placeholder.png";
 
 export default function MovieSlider(props) {
   const [category, setCategory] = useState(props.category);
@@ -32,25 +32,31 @@ export default function MovieSlider(props) {
       }?language=en-US&page=${page.toString()}`,
       options
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 404) return;
+        return response.json();
+      })
       .then((data) => {
-        let temp = [...results];
-        data.results.forEach((result) => {
-          if (!fetchedDetails.has(result.id)) {
-            if (props.name !== "Recommendations-Library") {
-              temp.push(result);
-            } else {
-              if (
-                !(result.id in props.favoriteMovies) &&
-                !(result.id in props.watchlistedMovies)
-              ) {
+        console.log(data);
+        if (data) {
+          let temp = [...results];
+          data.results.forEach((result) => {
+            if (!fetchedDetails.has(result.id)) {
+              if (props.name !== "Recommendations-Library") {
                 temp.push(result);
+              } else {
+                if (
+                  !(result.id in props.favoriteMovies) &&
+                  !(result.id in props.watchlistedMovies)
+                ) {
+                  temp.push(result);
+                }
               }
             }
-          }
-        });
-        // console.log(temp);
-        setResults(temp);
+          });
+          // console.log(temp);
+          setResults(temp);
+        }
       });
   }, [page, category]);
 

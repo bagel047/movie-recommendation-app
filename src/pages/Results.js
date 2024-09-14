@@ -47,10 +47,12 @@ export default function Results() {
   }
 
   return (
-    <div>
+    <div className="py-1 px-2 bg-zinc-900 bg-opacity-60">
       <div className="mt-2 mb-4 px-2 text-xs">
         <span className="text-zinc-300">Total results: {totalResults}</span>
-        <span className="block ">Page: {page}</span>
+        <span className="block">
+          Page <span className="text-red-700">{page}</span> of {totalPages}
+        </span>
       </div>
       <div className="flex flex-col">
         {results && results.length > 0 ? (

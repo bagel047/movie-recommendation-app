@@ -43,7 +43,7 @@ export default function Library() {
     <>
       <PopupMessage />
       <div className="mb-3 bg-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 py-8 px-3 lg:p-8 rounded-t-xl">
-        <h1 className="tracking-wider text-3xl font-semibold mt-3 mb-3">
+        <h1 className="tracking-wider text-3xl font-semibold mt-3 mb-4">
           Your library
         </h1>
         <div className="flex gap-1.5 text-sm">
@@ -55,8 +55,8 @@ export default function Library() {
             className={`${
               showWatchlists
                 ? "bg-opacity-100 hover:bg-opacity-40"
-                : "bg-opacity-15"
-            } border-1 border-zinc-950 bg-zinc-950 hover:bg-opacity-100 rounded-full py-1.5 px-3`}
+                : "bg-opacity-30 border-1 border-zinc-700"
+            } bg-zinc-950 hover:bg-opacity-100 rounded-xl py-2 px-3`}
           >
             Watchlists
           </button>
@@ -68,8 +68,8 @@ export default function Library() {
             className={`${
               showFavorites
                 ? "bg-opacity-100 hover:bg-opacity-40"
-                : "bg-opacity-15"
-            } border-1 border-zinc-950 bg-zinc-950 hover:bg-opacity-100 rounded-full py-1.5 px-3`}
+                : "bg-opacity-30 border-1 border-zinc-700"
+            } bg-zinc-950 hover:bg-opacity-100 rounded-xl py-2 px-3`}
           >
             Favorites
           </button>
@@ -142,7 +142,7 @@ export default function Library() {
         ) : null}
       </div>
 
-      {userId ? (
+      {favoriteMoviesArray.length > 0 ? (
         <div className="mt-4 py-8 px-1 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
           <h2 className="text-lg mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
             You might like:

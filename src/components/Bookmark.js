@@ -71,7 +71,7 @@ export default function Bookmark(props) {
 
   return (
     <>
-      <button onClick={handleClick} className="hover:cursor-pointer z-50">
+      <button onClick={handleClick} className="hover:cursor-pointer">
         {isClicked ? (
           <BookmarkIconSolid
             title="Remove from Watchlist"

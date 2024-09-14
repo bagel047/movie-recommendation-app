@@ -18,7 +18,7 @@ export default function GoogleSignIn() {
     <button
       onClick={onGoogleSignIn}
       type="button"
-      className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 text-sm rounded-lg text-sm w-full px-4 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 font-bold"
+      className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 text-sm rounded-lg text-xs w-full px-4 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 font-semibold"
     >
       <svg
         className="w-4 h-4 me-2"

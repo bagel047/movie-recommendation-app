@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFavorites } from "../contexts/favoritesContext/favoritesContext";
-import MovieSlider from "../pages/home/MovieSlider";
+import MovieSlider from "./MovieSlider";
 import { useWatchlist } from "../contexts/watchlistContext/watchlistContext";
 
 export default function Recommendations(props) {

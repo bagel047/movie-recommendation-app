@@ -33,7 +33,7 @@ export default function SearchDropdown(props) {
           onClick={toggleShow}
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="max-w-28 min-w-28 flex-shrink-0 z-10 inline-flex justify-center items-center gap-1 py-2.5 px-3 text-sm font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-600 dark:text-white border-1 border-zinc-700"
+          className="max-w-28 min-w-28 flex-shrink-0 z-10 inline-flex justify-center items-center gap-1 py-2.5 px-3 text-xs font-medium text-center text-zinc-600 bg-zinc-800 rounded-s-md hover:bg-zinc-200 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-600 dark:text-white border-1 border-zinc-800"
           type="button"
         >
           <svg
@@ -60,7 +60,7 @@ export default function SearchDropdown(props) {
             className="absolute z-10 rounded-b-md shadow w-44 dark:bg-zinc-950 dark:bg-opacity-90 py-2.5"
           >
             <ul
-              className="px-0 m-0 text-sm text-gray-700 dark:text-gray-200"
+              className="px-0 m-0 text-xs text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDefaultButton"
             >
               <div className="divide divide-y divide-zinc-600">

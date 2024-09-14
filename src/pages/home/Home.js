@@ -1,4 +1,4 @@
-import MovieSlider from "./MovieSlider";
+import MovieSlider from "../../components/MovieSlider";
 import background from "../../assets/images/background.jpg";
 import { useEffect, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
