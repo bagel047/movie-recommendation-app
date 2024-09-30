@@ -78,12 +78,6 @@ export default function ProfileIcon() {
                   </NavLink>
                 )}
               </li>
-
-              {/* <li className="text-center text-xs">
-                <NavLink className="no-underline">
-                  Change profile picture
-                </NavLink>
-              </li> */}
             </ul>
           </div>
         ) : null}

@@ -24,13 +24,10 @@ export default function Library() {
 
   useEffect(() => {
     if (!userId) {
-      navigate("/login", {
-        state: {
-          previousUrl: location.pathname,
-        },
-      });
+      localStorage.setItem("previousPathname", location.pathname);
+      navigate("/login");
     }
-  }, [userId]);
+  }, [userId, location.pathname]);
 
   useEffect(() => {
     console.log("watchlisted movies: ", watchlistedMoviesArray);

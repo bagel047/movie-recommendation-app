@@ -26,7 +26,6 @@
     width: 8px;
     background: #981b1a;
     border-radius: 20px;
-    /* border: 1px solid #f6f7ed; */
   }
 
   .scrollbar::-webkit-scrollbar-track:hover {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { doSignInWithEmailAndPassword } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../components/GoogleSignIn";
 import { useMessage } from "../../contexts/messageContext/messageContext";
 import PopupMessage from "../../components/PopupMessage";
@@ -9,7 +9,6 @@ import PopupMessage from "../../components/PopupMessage";
 export default function Login() {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,8 +17,7 @@ export default function Login() {
 
   const { updateMessage } = useMessage();
   useEffect(() => {
-    if (location?.state?.previousUrl === "/library") {
-      console.log(location.state.previousUrl);
+    if (localStorage.getItem("previousPathname") === "/library") {
       updateMessage("Log in to use your library");
     }
   }, []);
@@ -42,10 +40,8 @@ export default function Login() {
   useEffect(() => {
     if (userLoggedIn) {
       navigate(
-        location?.state?.previousUrl
-          ? location.state.previousUrl
-          : sessionStorage?.previousUrl
-          ? sessionStorage.previousUrl
+        localStorage.getItem("previousPathname")
+          ? localStorage.getItem("previousPathname")
           : "/home"
       );
     }
@@ -107,7 +103,7 @@ export default function Login() {
           </form>
           <GoogleSignIn></GoogleSignIn>
           <div className="mt-3 text-xs text-center">
-            <span className="">Don't have an account? </span>
+            <span>Don't have an account? </span>
             <Link to={"/register"}>Register</Link>
           </div>
         </div>

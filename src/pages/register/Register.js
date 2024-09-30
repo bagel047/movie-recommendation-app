@@ -21,12 +21,15 @@ export default function Register() {
         await doCreateUserWithEmailAndPassword(email, password);
         setIsRegistering(false);
       } catch (err) {
+        console.log(err.message);
         if (err.message.includes("missing-password"))
           addError("Please enter a password.");
         if (err.message.includes("weak-password"))
           addError("Password must contain at least 6 characters.");
         if (err.message.includes("invalid-email"))
           addError("Please enter a valid email address.");
+        if (err.message.includes("email-already-in-use"))
+          addError("Email is already registered.");
         setIsRegistering(false);
       }
       console.log(userLoggedIn);
@@ -73,6 +76,11 @@ export default function Register() {
                   className="mb-2 bg-red-950 bg-opacity-30 mx-auto text-center p-2.5 rounded border-1 border-red-600 text-sm"
                 >
                   {err}
+                  {err === "Email is already registered." ? (
+                    <a href="/login" className="pl-2">
+                      Login
+                    </a>
+                  ) : null}
                 </div>
               );
             })}

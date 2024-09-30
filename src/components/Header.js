@@ -1,4 +1,3 @@
-import { useContext, useEffect } from "react";
 import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../firebase/auth";
 import {
@@ -7,10 +6,10 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
-import logo1 from "../assets/images/logo1.png";
+import { NavLink, Link } from "react-router-dom";
 import Search from "./Search";
 import ProfileIcon from "./ProfileIcon";
+import popcorn_img from "../assets/images/popcorn.png";
 
 const navigation = [
   { name: "Home", href: "/home" },
@@ -28,7 +27,7 @@ export default function Header(props) {
     <>
       <Disclosure
         as="nav"
-        className="bg-zinc-950 bg-opacity-95 font-poppins fixed w-full z-50"
+        className="bg-zinc-950 bg-opacity-95 font-lato fixed w-full z-50"
       >
         <div className="mx-auto max-w-screen-2xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-[4.5rem] items-center justify-between">
@@ -47,13 +46,23 @@ export default function Header(props) {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-8">
               {" "}
               {/* sm:items-stretch sm:justify-start */}
               {/* Logo Div */}
               {/* <div className="flex flex-shrink-0 items-center">
                 <img src={logo1} className="w-[30px] h-[30px]"></img>
               </div> */}
+              <Link to="/">
+                <div className="flex flex-shrink-0 items-center text-5xl inline-flex items-end">
+                  <span>
+                    <img src={popcorn_img} className="inline-block h-10" />
+                  </span>
+                  <span className="tracking-widest pt-7 text-sm text-white">
+                    ineRec
+                  </span>
+                </div>
+              </Link>
               <div className="hidden ml-6 lg:ml-0 sm:block">
                 <div className="flex gap-1 items-center">
                   {navigation.map((item) => (

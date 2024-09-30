@@ -16,6 +16,7 @@ import { WatchlistProvider } from "./contexts/watchlistContext/watchlistContext"
 import { FavoritesProvider } from "./contexts/favoritesContext/favoritesContext";
 import { MessageProvider } from "./contexts/messageContext/messageContext";
 import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
 
 function App() {
   useEffect(() => {
@@ -53,6 +54,7 @@ function App() {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Header>
+              <Footer />
             </BrowserRouter>
           </WatchlistProvider>
         </FavoritesProvider>

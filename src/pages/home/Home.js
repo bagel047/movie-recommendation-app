@@ -2,6 +2,7 @@ import MovieSlider from "../../components/MovieSlider";
 import background from "../../assets/images/background.jpg";
 import { useEffect, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
+import popcorn_img from "../../assets/images/popcorn.png";
 
 export default function Home() {
   const [secondFetch, setSecondFetch] = useState(false);
@@ -17,15 +18,21 @@ export default function Home() {
   return (
     <>
       <PopupMessage />
-      <div className="font-poppins">
+      <div className="">
         <div className="relative mb-16">
           <img
             src={background}
             className="max-h-96 w-full object-cover mix-blend-overlay"
           ></img>
-          <h1 className="absolute bottom-4 left-3 lg:bottom-8 lg:left-10 font-bold text-4xl">
-            Discover and keep track of movies and TV shows in one place
+          <h1 className="absolute bottom-4 left-3 lg:bottom-24 lg:left-10 font-bold text-5xl inline-flex items-end">
+            <span>
+              <img src={popcorn_img} className="inline-block h-36" />
+            </span>
+            <span className="tracking-wider pb-2">ineRec</span>
           </h1>
+          <h2 className="absolute bottom-4 left-3 lg:bottom-8 lg:left-10 font-bold text-4xl">
+            Discover and keep track of movies and TV shows in one place
+          </h2>
         </div>
 
         <div className="mb-12 py-8 px-6 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
@@ -55,7 +62,7 @@ export default function Home() {
               <MovieSlider name="Top Rated" category="top_rated" type="tv" />
             </div>
 
-            <div className="mb-12 py-8 px-6 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+            <div className="py-8 px-6 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
               <h2 className="text-xl mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
                 In theaters
               </h2>

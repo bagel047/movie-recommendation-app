@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { options } from "../shared";
 import StarRating from "../components/StarRating";
 import Bookmark from "../components/Bookmark";
@@ -26,6 +26,11 @@ export default function Movie() {
   const [releaseDate, setReleaseDate] = useState();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem("previousPathname", location.pathname);
+  }, [location.pathname]);
 
   useEffect(() => {
     window.scrollTo({
