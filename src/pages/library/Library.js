@@ -140,7 +140,7 @@ export default function Library() {
       </div>
 
       {favoriteMoviesArray.length > 0 ? (
-        <div className="mt-4 py-8 px-1 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+        <div className="mt-4 py-8 px-2.5 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
           <h2 className="text-lg mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
             You might like:
           </h2>

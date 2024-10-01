@@ -35,6 +35,10 @@ export default function Results() {
 
   function handlePageClick(pageNumber) {
     setPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   const pagesToShow = 3;

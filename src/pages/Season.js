@@ -90,36 +90,39 @@ export default function Season() {
 
   return (
     <>
-      <div className="w-full relative">
-        <img
-          src={backdropUrl}
-          alt={`${tvShow} Backdrop`}
-          className="h-[720px] w-full object-cover mix-blend-overlay"
-        ></img>
-
-        <div className="absolute top-0 left-0 w-full h-[720px] flex flex-wrap justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent md:px-48 lg:px-48 sm:px-4">
-          <div className="md:w-1/3 lg:w-1/3 p-2">
+      <div
+        className="w-full h-fit"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url(${backdropUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="w-full sm:h-fit lg:h-[660px] flex flex-wrap gap-2.5 lg:gap-0 justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent px-3">
+          <div className="p-2">
             <img
               src={posterUrl}
               alt={`${tvShow} Poster`}
-              className="w-full md:h-auto"
+              className="w-[350px] h-[500px]"
             ></img>
           </div>
 
-          <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
+          <div className="sm:w-full lg:w-2/3 p-2">
             <Link to={`/tv/${tvID}`} className="no-underline text-white">
               <h1 className="font-bold text-6xl">{tvShow}</h1>
             </Link>
             <h2 className="font-bold text-3xl text-red-800">
               Season {seasonID}
             </h2>
-            <span className="text-sm text-zinc-300 inline-block pr-2">
-              &middot; First air date: {firstAirDate ? firstAirDate : ""}
-            </span>
-            <span className="text-sm text-zinc-300 inline-block">
-              &middot; Episodes:{" "}
-              {episodes && episodes.length > 0 ? episodes.length : "N/A"}
-            </span>
+            <div className="sm:flex-col lg:flex lg:flex-row gap-3 text-sm text-zinc-300">
+              <span className="block">
+                &middot; First air date: {firstAirDate ? firstAirDate : ""}
+              </span>
+              <span className="block">
+                &middot; Episodes:{" "}
+                {episodes && episodes.length > 0 ? episodes.length : "N/A"}
+              </span>
+            </div>
             <div className="mt-4 text-justify">
               <p>
                 {seasonDetails.overview ? (
@@ -147,7 +150,7 @@ export default function Season() {
                 )}
               </p>
 
-              <div className="flex items-center mt-2.5 mb-5">
+              <div className="flex items-center mt-2.5 mb-2.5">
                 <StarRating rating={seasonDetails?.vote_average || 0} />
 
                 <span
@@ -167,7 +170,7 @@ export default function Season() {
               </div>
             </div>
 
-            <div className="mt-4 flex w-full items-center gap-2.5">
+            <div className="mb-2 mt-4 flex w-full items-center gap-2.5">
               <TrailerButton trailerKey={trailerKey}></TrailerButton>
             </div>
           </div>

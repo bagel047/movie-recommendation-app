@@ -61,7 +61,8 @@ export default function ProfileIcon() {
                 {userLoggedIn ? (
                   <NavLink
                     to="/login"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       toggleShow();
                       doSignOut();
                     }}

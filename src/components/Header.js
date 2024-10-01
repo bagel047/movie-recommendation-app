@@ -47,13 +47,7 @@ export default function Header(props) {
               </DisclosureButton>
             </div>
             <div className="flex items-center gap-8">
-              {" "}
-              {/* sm:items-stretch sm:justify-start */}
-              {/* Logo Div */}
-              {/* <div className="flex flex-shrink-0 items-center">
-                <img src={logo1} className="w-[30px] h-[30px]"></img>
-              </div> */}
-              <Link to="/">
+              <Link to="/" className="hidden lg:block">
                 <div className="flex flex-shrink-0 items-center text-5xl inline-flex items-end">
                   <span>
                     <img src={popcorn_img} className="inline-block h-10" />

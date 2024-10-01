@@ -9,7 +9,7 @@ export default function Episode(props) {
       : movie_placeholder;
 
   return (
-    <div className="w-full mt-3 bg-zinc-950 bg-opacity-90 p-8 rounded-md flex gap-3 items-start">
+    <div className="w-full mt-3 bg-zinc-950 bg-opacity-90 p-8 rounded-md sm:flex-col sm:items-center lg:flex lg:flex-row lg:items-start gap-3">
       <img
         src={img}
         alt={`Episode ${data.episode_number} Image`}
@@ -23,7 +23,9 @@ export default function Episode(props) {
           {data?.runtime ? <>&middot; {data.runtime}m</> : null}
         </span>
         <h3 className="text-lg">{data?.name}</h3>
-        <p className="mt-2.5 text-sm text-zinc-200">{data?.overview}</p>
+        <p className="mt-2.5 text-sm text-zinc-200 text-justify">
+          {data?.overview}
+        </p>
       </div>
     </div>
   );

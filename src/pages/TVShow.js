@@ -115,28 +115,30 @@ export default function TVShow() {
   return (
     <>
       <PopupMessage />
-      <div className="w-full relative">
-        <img
-          src={backdropUrl}
-          className="h-[720px] w-full object-cover mix-blend-overlay"
-        ></img>
-
-        <div className="absolute top-0 left-0 w-full h-[720px] flex flex-wrap justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent md:px-48 lg:px-48 sm:px-4">
-          <div className="md:w-1/3 lg:w-1/3 p-2">
+      <div
+        className="w-full h-fit"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url(${backdropUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="w-full sm:h-fit lg:h-[660px] flex flex-wrap gap-2.5 lg:gap-0 justify-center items-center bg-gradient-to-r from-zinc-950 to-transparent px-3">
+          <div className="p-2">
             <img
               src={posterUrl}
               alt={`${details.name} Poster`}
-              className="w-full md:h-auto"
+              className="w-[350px] h-[500px]"
             ></img>
           </div>
 
-          <div className="md:w-2/3 lg:w-2/3 sm:w-full p-2">
+          <div className="sm:w-full lg:w-2/3 p-2">
             <h1 className="font-bold text-6xl">{details.name}</h1>
-            <div className="flex gap-2.5 text-sm text-zinc-300">
-              <span className="inline-block">
+            <div className="sm:flex-col lg:flex lg:flex-row gap-3 text-sm text-zinc-300">
+              <span className="block">
                 &middot; First air date: {firstAirDate ? firstAirDate : ""}
               </span>
-              <span className="inline-block">
+              <span className="block">
                 &middot;{" "}
                 {details.genres && details.genres.length > 0
                   ? details.genres.map((genre, i) => {
@@ -146,7 +148,7 @@ export default function TVShow() {
                     })
                   : "Genres not available"}
               </span>
-              <span className="inline-block">
+              <span className="block">
                 &middot; Seasons:{" "}
                 {details?.number_of_seasons ? details.number_of_seasons : "N/A"}
               </span>
@@ -178,7 +180,7 @@ export default function TVShow() {
                 )}
               </p>
 
-              <div className="flex items-center mt-2.5 mb-5">
+              <div className="flex items-center mt-2.5 mb-2.5">
                 <StarRating rating={details?.vote_average || 0} />
 
                 <span
@@ -207,7 +209,7 @@ export default function TVShow() {
               </div>
             </div>
 
-            <div className="mt-4 flex w-full items-center gap-2.5">
+            <div className="mb-2 mt-4 flex w-full items-center gap-2.5">
               <TrailerButton
                 trailerKey={trailerKey}
                 details={details}
@@ -221,7 +223,7 @@ export default function TVShow() {
 
       {/* Cast and Reviews section*/}
       <div className="w-full flex flex-col lg:flex-row gap-2 mt-4 justify-between">
-        <div className="lg:w-3/4 w-full max-h-[22rem] bg-gradient-to-r from-zinc-950 to-zinc-900 px-6 py-8 rounded-md relative">
+        <div className="lg:w-3/4 w-full max-h-[22rem] bg-gradient-to-r from-zinc-950 to-zinc-900 px-4 py-8 rounded-md relative">
           <h2 className="text-lg mb-3 pl-3 tracking-wide">Cast</h2>
           {credits.cast && credits.cast.length > 0 ? (
             <div className="flex overflow-x-scroll scrollbar scroll-smooth whitespace-nowrap py-3">
@@ -235,7 +237,7 @@ export default function TVShow() {
             </div>
           )}
         </div>
-        <div className="lg:w-1/4 w-full max-h-[22rem] bg-zinc-900 px-6 py-8 rounded-md">
+        <div className="lg:w-1/4 w-full max-h-[22rem] bg-zinc-900 px-4 py-8 rounded-md">
           <h2 className="text-lg mb-3 pl-3 tracking-wide">Reviews</h2>
           <div className="max-h-64 pr-2 flex flex-col scrollable-container overflow-y-auto scrollbar scroll-smooth whitespace-nowrap">
             {reviews.length > 0 ? (
@@ -268,7 +270,7 @@ export default function TVShow() {
       </div>
 
       {/* Recommendations section*/}
-      <div className="w-full mt-4 px-6 py-8 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+      <div className="w-full mt-4 px-4 py-8 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
         <h2 className="text-lg mb-4 tracking-wide pl-3 border-b border-zinc-800 pb-2.5">
           Recommendations based on{" "}
           <span className="font-semibold italic text-red-600">

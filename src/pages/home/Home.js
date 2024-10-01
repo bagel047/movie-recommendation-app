@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <PopupMessage />
-      <div className="">
+      <div>
         <div
           className="mb-16 sm:flex sm:flex-wrap flex flex-col justify-end gap-2.5 h-96 px-3 py-2"
           style={{
@@ -39,7 +39,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="mb-12 py-8 px-6 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+        <div className="mb-12 py-8 px-2.5 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
           <h2 className="text-xl mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
             Popular
           </h2>
@@ -54,7 +54,7 @@ export default function Home() {
 
         {secondFetch && (
           <>
-            <div className="mb-12 py-8 px-6 rounded-md bg-gradient-to-bl from-zinc-950 to-zinc-900">
+            <div className="mb-12 py-8 px-2.5 rounded-md bg-gradient-to-bl from-zinc-950 to-zinc-900">
               <h2 className="text-xl mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
                 Top Rated
               </h2>
@@ -66,7 +66,7 @@ export default function Home() {
               <MovieSlider name="Top Rated" category="top_rated" type="tv" />
             </div>
 
-            <div className="py-8 px-6 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
+            <div className="py-8 px-2.5 rounded-md bg-gradient-to-br from-zinc-950 to-zinc-900">
               <h2 className="text-xl mb-4 pl-10 text-red-600 tracking-wide font-semibold uppercase border-b border-zinc-800 pb-2.5">
                 In theaters
               </h2>
