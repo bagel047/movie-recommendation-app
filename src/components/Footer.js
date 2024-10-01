@@ -4,10 +4,10 @@ export default function Footer() {
   return (
     <div className="bg-zinc-950 font-poppins h-fit px-3 py-16">
       <div className="max-w-screen-2xl mx-auto text-white text-xs">
-        <div className="flex items-top">
-          <div className="w-1/4 inline-block">
+        <div className="flex items-top justify-center gap-32">
+          <div className="inline-block text-center">
             <span className="font-semibold">Explore</span>
-            <div className="mt-2">
+            <div className="mt-2 flex flex-col items-center">
               <a
                 href="/home"
                 className="block text-white no-underline hover:underline py-1 w-fit"
@@ -22,7 +22,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="w-1/4 inline-block">
+          <div className="inline-block text-center">
             <span className="font-semibold">Contact us</span>
             <div className="mt-2">
               <a href="mailto:bage.josifoska@gmail.com" target="_blank">
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-4 border-t border-zinc-800 text-zinc-300 pt-3 text-center">
-          Copyright &copy; 2024 MovieRecc. All rights reserved.
+          Copyright &copy; 2024 CineRec. All rights reserved.
         </div>
       </div>
     </div>

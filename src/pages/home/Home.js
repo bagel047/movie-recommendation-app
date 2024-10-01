@@ -1,5 +1,5 @@
 import MovieSlider from "../../components/MovieSlider";
-import background from "../../assets/images/background.jpg";
+import background from "../../assets/images/background1.jpg";
 import { useEffect, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
 import popcorn_img from "../../assets/images/popcorn.png";
@@ -19,18 +19,22 @@ export default function Home() {
     <>
       <PopupMessage />
       <div className="">
-        <div className="relative mb-16">
-          <img
-            src={background}
-            className="max-h-96 w-full object-cover mix-blend-overlay"
-          ></img>
-          <h1 className="absolute bottom-4 left-3 lg:bottom-24 lg:left-10 font-bold text-5xl inline-flex items-end">
+        <div
+          className="mb-16 sm:flex sm:flex-wrap flex flex-col justify-end gap-2.5 h-96 px-3 py-2"
+          style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <h1 className="font-bold text-3xl lg:text-6xl inline-flex items-end">
             <span>
-              <img src={popcorn_img} className="inline-block h-36" />
+              <img src={popcorn_img} className="inline-block h-32 lg:h-44" />
             </span>
-            <span className="tracking-wider pb-2">ineRec</span>
+            <span className="tracking-[0.1em] lg:tracking-[0.15em] pb-2 text-zinc-100">
+              ineRec
+            </span>
           </h1>
-          <h2 className="absolute bottom-4 left-3 lg:bottom-8 lg:left-10 font-bold text-4xl">
+          <h2 className="font-semibold text-3xl text-zinc-100 tracking-wide">
             Discover and keep track of movies and TV shows in one place
           </h2>
         </div>
