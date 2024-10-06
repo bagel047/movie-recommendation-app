@@ -75,12 +75,12 @@ export default function Heart(props) {
       {isClicked ? (
         <HeartIconSolid
           title="Remove from Favorites"
-          className={`size-5 text-red-600 hover:opacity-70`}
+          className={`size-6 text-red-600 hover:opacity-70`}
         ></HeartIconSolid>
       ) : (
         <HeartIconOutline
           title="Add to Favorites"
-          className={`size-5 hover:text-red-600`}
+          className={`size-6 hover:text-red-600`}
         ></HeartIconOutline>
       )}
     </button>

@@ -3,12 +3,24 @@
 @tailwind utilities;
 
 .font-poppins {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+.font-poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.font-poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
 }
 
 @layer utilities {
@@ -36,4 +48,9 @@
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #fff;
   }
+}
+
+.text-outline {
+  -webkit-text-stroke: 0.5px black;
+  color: rgb(181, 0, 0);
 }

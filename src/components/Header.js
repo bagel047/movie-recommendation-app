@@ -27,7 +27,7 @@ export default function Header(props) {
     <>
       <Disclosure
         as="nav"
-        className="bg-zinc-950 bg-opacity-95 font-lato fixed w-full z-50"
+        className="bg-zinc-950 bg-opacity-95 fixed w-full z-50"
       >
         <div className="mx-auto max-w-screen-2xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-[4.5rem] items-center justify-between">
@@ -46,14 +46,14 @@ export default function Header(props) {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-12">
               <Link to="/" className="hidden lg:block">
-                <div className="flex flex-shrink-0 items-center text-5xl inline-flex items-end">
+                <div className="flex flex-shrink-0 items-end text-5xl inline-flex">
                   <span>
                     <img src={popcorn_img} className="inline-block h-10" />
                   </span>
-                  <span className="tracking-widest pt-7 text-sm text-white">
-                    ineRec
+                  <span className="tracking-widest text-sm text-white">
+                    CineRec
                   </span>
                 </div>
               </Link>

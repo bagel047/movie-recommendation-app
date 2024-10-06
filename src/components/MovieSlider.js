@@ -95,7 +95,7 @@ export default function MovieSlider(props) {
           <div className="flex justify-between">
             <ChevronLeftIcon
               onClick={slideLeft}
-              className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 p-1"
+              className="h-10 w-10 self-center text-zinc-400 hover:text-white cursor-pointer stroke-3 p-1"
             ></ChevronLeftIcon>
             <div
               id={`slider-${categoryFix != null ? categoryFix : category}-${
@@ -139,7 +139,7 @@ export default function MovieSlider(props) {
             <ChevronRightIcon
               id="right"
               onClick={slideRight}
-              className="size-10 self-center opacity-50 hover:opacity-100 cursor-pointer stroke-3 p-1"
+              className="h-10 w-10 self-center text-zinc-400 hover:text-white cursor-pointer stroke-3 p-1"
             ></ChevronRightIcon>
           </div>
         </div>
