@@ -133,7 +133,9 @@ export default function TVShow() {
           </div>
 
           <div className="sm:w-full lg:w-2/3 p-2">
-            <h1 className="font-bold text-6xl">{details.name}</h1>
+            <h1 className="font-bold sm:text-4xl lg:text-6xl">
+              {details.name}
+            </h1>
             <div className="sm:flex-col lg:flex lg:flex-row gap-3 text-sm text-zinc-300">
               <span className="block">
                 &middot; First air date: {firstAirDate ? firstAirDate : ""}

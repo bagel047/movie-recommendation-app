@@ -109,7 +109,7 @@ export default function Season() {
 
           <div className="sm:w-full lg:w-2/3 p-2">
             <Link to={`/tv/${tvID}`} className="no-underline text-white">
-              <h1 className="font-bold text-6xl">{tvShow}</h1>
+              <h1 className="font-bold sm:text-4xl lg:text-6xl">{tvShow}</h1>
             </Link>
             <h2 className="font-bold text-3xl text-red-800">
               Season {seasonID}

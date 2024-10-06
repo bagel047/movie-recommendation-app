@@ -140,8 +140,10 @@ export default function Movie() {
                 ></img>
               </div>
 
-              <div className="sm:w-full lg:w-2/3 p-2">
-                <h1 className="font-bold text-6xl">{details.title}</h1>
+              <div className="w-full lg:w-2/3 p-2">
+                <h1 className="font-bold sm:text-4xl lg:text-6xl">
+                  {details.title}
+                </h1>
                 <div className="sm:flex-col lg:flex lg:flex-row gap-3 text-sm text-zinc-300">
                   <span className="block">
                     &middot; {releaseDate ? releaseDate : ""}

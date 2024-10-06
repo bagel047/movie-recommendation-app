@@ -54,7 +54,7 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <div className="w-fit mx-auto mt-4">
+    <div className="sm:w-full lg:w-fit mx-auto mt-4">
       <PopupMessage />
       <>
         {error && (
@@ -66,8 +66,11 @@ export default function Login() {
           <form onSubmit={onSubmit}>
             <h3 className="text-lg font-semibold">Login</h3>
 
-            <div className="flex justify-between items-center mt-6 mb-2 pb-2">
-              <label htmlFor="email" className="mr-2 text-sm">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-2 lg:items-center mt-6 mb-2 pb-2">
+              <label
+                htmlFor="email"
+                className="mr-2 text-sm block lg:inline-block"
+              >
                 Email:
               </label>
               <input
@@ -77,10 +80,10 @@ export default function Login() {
                 id="email"
                 placeholder="name.surname@gmail.com"
                 value={email}
-                className="h-10 rounded min-w-[210px] px-2 bg-zinc-800 text-sm"
+                className="h-10 rounded min-w-full lg:min-w-[210px] px-2 bg-zinc-800 text-sm block lg:inline-block"
               ></input>
             </div>
-            <div className="flex justify-between items-center pb-3">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-2 lg:items-center mt-6 mb-2 pb-3">
               <label htmlFor="password" className="mr-2 text-sm">
                 Password:
               </label>
@@ -92,7 +95,7 @@ export default function Login() {
                 type="password"
                 placeholder="&middot; &middot; &middot; &middot; &middot; &middot; &middot; &middot; &middot; &middot;"
                 value={password}
-                className="h-10 rounded min-w-[210px] px-2 bg-zinc-800 text-sm"
+                className="h-10 rounded min-w-full lg:min-w-[210px] px-2 bg-zinc-800 text-sm"
               ></input>
             </div>
             <div className="border-t border-zinc-800">
