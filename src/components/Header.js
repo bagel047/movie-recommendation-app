@@ -78,7 +78,7 @@ export default function Header(props) {
             </div>
 
             <div className="flex items-center sm:w-2/12 lg:w-4/12 gap-3">
-              <div className="sm:w-full lg:w-full">
+              <div className="w-64 lg:w-full">
                 <Search />
               </div>
               <div className="">
